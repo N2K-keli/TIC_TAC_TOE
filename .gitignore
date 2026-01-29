@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.db
+*.opendb
+
+# Build folders
+x64/
+x86/
+Debug/
+Release/
+
+# Binaries
+*.exe
+*.dll
+*.obj
+*.ilk
+*.pdb
+
+# Logs
+*.log
