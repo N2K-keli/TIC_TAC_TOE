@@ -1,24 +1,26 @@
-#include <SFML/Graphics.hpp>
-#include <string>
+#include <iostream>
+#include <SFML\Graphics.hpp>
+#include <optional>
 
-int main()
+int main() 
 {
-    sf::RenderWindow window(
-        sf::VideoMode({ 800, 600 }),
-        "SFML 3 - Visual Studio"
-    );
+	sf::RenderWindow window(sf::VideoMode(sf::Vector2u{800, 600}), "TIC TAC TOE");
+	
+	while (window.isOpen())
+	{
+	
+		while( std::optional<sf::Event> event = window.pollEvent()) 
+		{
+			if( (*event).is<sf::Event::Closed>() )
+			{
+				window.close();
+			}
+		}
+		
+		window.clear();
+		window.display();
+	}
+	
 
-    while (window.isOpen())
-    {
-        while (auto event = window.pollEvent())
-        {
-            if (event->is<sf::Event::Closed>())
-                window.close();
-        }
-
-        window.clear();
-        window.display();
-    }
-
-    return 0;
+	return 0;
 }
