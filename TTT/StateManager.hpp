@@ -13,13 +13,14 @@ enum GameState
 class StateManager
 {
 
+
 	private:
 		GameState state; 
+		
 
 
 	public:
 		StateManager(); 
-		void LoadIntro();
 		void setState(GameState state);
 		GameState getState();
 		

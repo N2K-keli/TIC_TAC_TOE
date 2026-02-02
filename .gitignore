@@ -4,19 +4,29 @@
 *.suo
 *.db
 *.opendb
+*.VC.db
+*.VC.VC.opendb
 
-# Build folders
-x64/
-x86/
+# Build output
 Debug/
 Release/
-
-# Binaries
+x64/
+x86/
 *.exe
 *.dll
 *.obj
-*.ilk
 *.pdb
+*.ilk
+*.iobj
+*.ipdb
+*.idb
+
+# SFML DLLs (users should get these from SFML installation)
+sfml-*.dll
+openal32.dll
+
+# Precompiled headers
+*.pch
 
 # Logs
 *.log
