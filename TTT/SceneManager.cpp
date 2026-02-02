@@ -9,7 +9,7 @@ using namespace std::chrono_literals;
 // constructor
 SceneManager::SceneManager(sf::RenderWindow& window)
 {
-    if (!logo.loadFromFile("assets/images/logo.jpeg"))
+    if (!logo.loadFromFile("assets/images/logo.png"))
     {
         std::cerr << "Error: Could not load logo\n";
     }
