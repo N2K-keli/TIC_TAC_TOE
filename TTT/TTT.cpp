@@ -9,25 +9,9 @@
 
 
 
-
 int main() 
 {
 
-
-	std::cout << "SFML Version: " << SFML_VERSION_MAJOR << "."
-		<< SFML_VERSION_MINOR << "." << SFML_VERSION_PATCH << std::endl;
-
-#ifdef SFML_DEBUG
-	std::cout << "SFML Debug mode\n";
-#else
-	std::cout << "SFML Release mode\n";
-#endif
-
-#ifdef _DEBUG
-	std::cout << "Your code: Debug mode\n";
-#else
-	std::cout << "Your code: Release mode\n";
-#endif
 	Board chessBoard; // board CehssBoard =  new board () ;
 	// StateManager stateMnagerObgject; 
 	
@@ -46,6 +30,7 @@ int main()
 		}
 		// chessBoard.worrkingBoard();
 		sceneManagerObject.LoadIntro(window);
+		sceneManagerObject.LoadMenu(window);
 		// window.display();
 		
 		// sceneManagerObject.LoadIntro(window);

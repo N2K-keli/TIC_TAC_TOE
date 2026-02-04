@@ -8,6 +8,8 @@ class SceneManager
 public:
 	SceneManager(sf::RenderWindow& window);
 	void LoadIntro(sf::RenderWindow& window);
+	void LoadMenu(sf::RenderWindow& window);
+
 	
 
 private:
