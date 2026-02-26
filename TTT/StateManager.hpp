@@ -2,11 +2,11 @@
 #include <SFML\Graphics.hpp>
 #include <string>
 
-enum GameState
+
+enum SceneState 
 {
-	
-	intro,
-	shutdowm
+	intro, 
+	menu , 
 
 };
 
@@ -15,17 +15,16 @@ class StateManager
 
 
 	private:
-		GameState state; 
+		SceneState currentSceneState; 
 		
 
 
 	public:
 		StateManager(); 
-		void setState(GameState state);
-		GameState getState();
+		void setcurrentSceneState(SceneState state);
+		SceneState getcurrentSceneState();
 		
-		
-		
+	
 };
 
 

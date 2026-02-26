@@ -6,35 +6,40 @@
 #include <filesystem>
 #include "SceneManager.hpp"
 #include <SFML/Config.hpp>
+#include "IntroScene.hpp"
 
 
 
 int main() 
 {
-
-	Board chessBoard; // board CehssBoard =  new board () ;
+	Board chessBoard; 
 	// StateManager stateMnagerObgject; 
-	
 	sf::RenderWindow window(sf::VideoMode(sf::Vector2u{800, 600}), "TIC TAC TOE");
-	SceneManager sceneManagerObject(window);
+	IntroScene introSceneObject(window);
+	SceneManager sceneManagerObject(window, introSceneObject);
+	StateManager stateManagerObject;
+
 	while (window.isOpen())
 	{
+		
 	
-		while( std::optional<sf::Event> event = window.pollEvent()) 
+		while(std::optional<sf::Event> event = window.pollEvent())
 		{
 			if( (*event).is<sf::Event::Closed>() )
 			{
 				window.close();
 			}
+			
 		
 		}
-		// chessBoard.worrkingBoard();
-		sceneManagerObject.LoadIntro(window);
-		sceneManagerObject.LoadMenu(window);
-		// window.display();
 		
-		// sceneManagerObject.LoadIntro(window);
-		// std::cout << std::filesystem::current_path() << std::endl;
+
+		if(stateManagerObject.getcurrentSceneState() == SceneState::intro)
+		{
+			sceneManagerObject.getIntroScene().LoadIntro(window);
+
+		}
+		
 	}
 
 	return 0;

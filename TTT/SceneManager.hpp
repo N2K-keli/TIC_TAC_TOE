@@ -1,21 +1,20 @@
 #pragma once 
 #include <iostream>
 #include <SFML\Graphics.hpp>
+#include "IntroScene.hpp"
 
 
 class SceneManager
 {
 public:
-	SceneManager(sf::RenderWindow& window);
-	void LoadIntro(sf::RenderWindow& window);
-	void LoadMenu(sf::RenderWindow& window);
-
 	
+	SceneManager(sf::RenderWindow& window , IntroScene introscene);
+
+	IntroScene getIntroScene();
 
 private:
-	sf::Texture logo;
-	std::optional<sf::Sprite> logoSprite;
-
 	
+	
+	IntroScene introScene;
 	
 };

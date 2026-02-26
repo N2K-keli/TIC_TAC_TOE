@@ -13,18 +13,18 @@
 
 StateManager::StateManager()
 {
-	this->state  = GameState::intro;
+	this->currentSceneState  = SceneState::intro;
 }
 
 //methods
  
 
 
-void StateManager::setState(GameState state)
+void StateManager::setcurrentSceneState(SceneState state)
 {
-	this->state = state;
+	this->currentSceneState = state;
 }
-GameState StateManager::getState() 
+SceneState StateManager::getcurrentSceneState()
 {
-	return this->state; 
+	return this->currentSceneState; 
 }

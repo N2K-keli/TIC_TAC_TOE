@@ -128,13 +128,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TTT.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BoarRender.hpp" />
     <ClInclude Include="include\Board.hpp" />
+    <ClInclude Include="IntroScene.hpp" />
     <ClInclude Include="SceneManager.hpp" />
     <ClInclude Include="StateManager.hpp" />
   </ItemGroup>
