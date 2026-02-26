@@ -6,13 +6,12 @@
 class AudioManager
 {
 public:
-	AudioManager(IntroAudio& intro_audio);
 	IntroAudio& getIntroAudio();
 	MenuAudio& getMenuAudio();
 	
 	
 private:
-	IntroAudio& introAudio;
+	IntroAudio introAudio;
 	MenuAudio menuAudio; 
 	
 };

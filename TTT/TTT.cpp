@@ -20,8 +20,7 @@ int main()
 	IntroScene introSceneObject(window);
 	SceneManager sceneManagerObject(window, introSceneObject);
 	StateManager stateManagerObject;
-	IntroAudio introManagerObject;
-	AudioManager audioManagerObject(introManagerObject);
+	AudioManager audioManagerObject;
 	
 	while (window.isOpen())
 	{
