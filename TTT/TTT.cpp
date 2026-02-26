@@ -9,6 +9,7 @@
 #include "IntroScene.hpp"
 #include"AudioManager.hpp"
 #include "IntroAudio.hpp"
+#include "MenuScene.hpp"
 
 
 int main() 
@@ -21,7 +22,7 @@ int main()
 	StateManager stateManagerObject;
 	IntroAudio introManagerObject;
 	AudioManager audioManagerObject(introManagerObject);
-
+	
 	while (window.isOpen())
 	{
 		
@@ -41,7 +42,17 @@ int main()
 		{
 			audioManagerObject.getIntroAudio().play();
 			sceneManagerObject.getIntroScene().LoadIntro(window);
+			window.clear();
+			stateManagerObject.setcurrentSceneState(SceneState::menu);
 			
+
+		}
+
+
+		if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
+		{
+			
+			sceneManagerObject.getMenuScene().drawMenu(window);
 
 		}
 		

@@ -15,3 +15,8 @@ IntroScene SceneManager::getIntroScene()
 {
     return introScene;
 }
+
+MenuScene SceneManager::getMenuScene()
+{
+    return menuScene;
+}
