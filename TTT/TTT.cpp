@@ -7,7 +7,8 @@
 #include "SceneManager.hpp"
 #include <SFML/Config.hpp>
 #include "IntroScene.hpp"
-
+#include"AudioManager.hpp"
+#include "IntroAudio.hpp"
 
 
 int main() 
@@ -18,6 +19,8 @@ int main()
 	IntroScene introSceneObject(window);
 	SceneManager sceneManagerObject(window, introSceneObject);
 	StateManager stateManagerObject;
+	IntroAudio introManagerObject;
+	AudioManager audioManagerObject(introManagerObject);
 
 	while (window.isOpen())
 	{
@@ -36,7 +39,9 @@ int main()
 
 		if(stateManagerObject.getcurrentSceneState() == SceneState::intro)
 		{
+			audioManagerObject.getIntroAudio().play();
 			sceneManagerObject.getIntroScene().LoadIntro(window);
+			
 
 		}
 		
