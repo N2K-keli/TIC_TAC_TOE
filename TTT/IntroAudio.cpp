@@ -21,7 +21,11 @@ IntroAudio::IntroAudio()
 
 void IntroAudio::play()
 {
-    music.play();
+    if(music.getStatus() != sf::Music::Status::Playing)
+    {
+        music.play();
+    }
+        
 }
 
 void IntroAudio::stop()

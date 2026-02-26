@@ -8,3 +8,7 @@ IntroAudio& AudioManager::getIntroAudio()
 {
 	return introAudio;
 }
+MenuAudio& AudioManager::getMenuAudio() 
+{
+	return menuAudio;
+}

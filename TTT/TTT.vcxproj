@@ -131,6 +131,7 @@
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="IntroAudio.cpp" />
     <ClCompile Include="IntroScene.cpp" />
+    <ClCompile Include="MenuAudio.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="src\Board.cpp" />
@@ -144,6 +145,7 @@
     <ClInclude Include="include\Board.hpp" />
     <ClInclude Include="IntroAudio.hpp" />
     <ClInclude Include="IntroScene.hpp" />
+    <ClInclude Include="MenuAudio.hpp" />
     <ClInclude Include="MenuScene.hpp" />
     <ClInclude Include="SceneManager.hpp" />
     <ClInclude Include="StateManager.hpp" />

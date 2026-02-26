@@ -51,7 +51,7 @@ int main()
 
 		if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
 		{
-			
+			audioManagerObject.getMenuAudio().play();
 			sceneManagerObject.getMenuScene().drawMenu(window);
 
 		}
