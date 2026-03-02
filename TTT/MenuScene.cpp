@@ -8,4 +8,7 @@ void MenuScene::drawMenu(sf::RenderWindow& window)
     exit.draw(window);
 
     window.display();
+    
+    window.draw(arrow.getArrowSprite());
+
 }

@@ -19,3 +19,7 @@ void TextHelper::draw(sf::RenderWindow& window)
 {
     window.draw(text);
 }
+sf::Text& TextHelper::getText() 
+{
+    return text;
+}

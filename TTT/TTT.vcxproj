@@ -128,6 +128,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="AudioManager.cpp" />
     <ClCompile Include="IntroAudio.cpp" />
     <ClCompile Include="IntroScene.cpp" />
@@ -140,6 +141,7 @@
     <ClCompile Include="TTT.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Arrow.hpp" />
     <ClInclude Include="AudioManager.hpp" />
     <ClInclude Include="BoarRender.hpp" />
     <ClInclude Include="include\Board.hpp" />
