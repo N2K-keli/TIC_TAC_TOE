@@ -11,8 +11,8 @@ public:
 	
 	SceneManager(sf::RenderWindow& window , IntroScene introscene);
 
-	IntroScene getIntroScene();
-	MenuScene getMenuScene();
+	IntroScene& getIntroScene();
+	MenuScene& getMenuScene();
 
 private:
 	

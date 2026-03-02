@@ -8,6 +8,8 @@ class MenuScene
 {
 public:
 	void drawMenu(sf::RenderWindow& window);
+    void updateMenuIndex(const sf::Event& event);
+    int selectedIndex = 0;
     
 
 

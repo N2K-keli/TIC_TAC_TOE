@@ -11,12 +11,12 @@ SceneManager::SceneManager(sf::RenderWindow& window, IntroScene introscene): int
 {
 }
 
-IntroScene SceneManager::getIntroScene()
+IntroScene& SceneManager::getIntroScene()
 {
     return introScene;
 }
 
-MenuScene SceneManager::getMenuScene()
+MenuScene& SceneManager::getMenuScene()
 {
     return menuScene;
 }

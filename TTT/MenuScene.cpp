@@ -1,4 +1,7 @@
 #include "MenuScene.hpp"
+#include "NavigationHelper.hpp"
+
+
 
 void MenuScene::drawMenu(sf::RenderWindow& window)
 {
@@ -7,8 +10,15 @@ void MenuScene::drawMenu(sf::RenderWindow& window)
     options.draw(window);
     exit.draw(window);
 
-    window.display();
-    
-    window.draw(arrow.getArrowSprite());
+    float arrowY = 200.f + (selectedIndex * 60.f) + 35.f;
+    arrow.getArrowSprite().setPosition({ 250.f, arrowY });
+
+    window.draw(arrow.getArrowSprite()); 
+    window.display();                   
+}
+void MenuScene::updateMenuIndex(const sf::Event& event)
+{
+    selectedIndex = NavigationHelper::moveUpDown(event, selectedIndex, 4);
+    std::cout << "selectedIndex: " << selectedIndex << "\n";
 
 }

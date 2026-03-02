@@ -32,6 +32,10 @@ int main()
 			{
 				window.close();
 			}
+			if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
+			{
+				sceneManagerObject.getMenuScene().updateMenuIndex(*event);
+			}
 			
 		
 		}
@@ -51,7 +55,9 @@ int main()
 		if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
 		{
 			audioManagerObject.getMenuAudio().play();
+			window.clear();
 			sceneManagerObject.getMenuScene().drawMenu(window);
+			
 
 		}
 		
