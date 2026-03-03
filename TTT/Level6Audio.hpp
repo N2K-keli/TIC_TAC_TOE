@@ -2,7 +2,7 @@
 #include <SFML/Audio.hpp>
 #include <iostream>
 
-class Leve61Audio
+class Level6Audio
 {
 public:
     Level6Audio();
