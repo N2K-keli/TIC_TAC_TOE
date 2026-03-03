@@ -57,6 +57,12 @@ int main()
 			audioManagerObject.getMenuAudio().play();
 			window.clear();
 			sceneManagerObject.getMenuScene().drawMenu(window);
+			if (sceneManagerObject.getMenuScene().shouldExit) 
+			{
+				audioManagerObject.getMenuAudio().stop();    
+				audioManagerObject.getIntroAudio().stop();
+				window.close();
+			}
 			
 
 		}
