@@ -11,10 +11,13 @@ public:
 	void arrowNavigationStop();
 	void arrowEnterPlay();
 	void arrowEnterStop();
+	void setMusicVolume(float volume);
+	void setSFXVolume(float volume);
 
 private:
 	sf::Music music;
 	sf::Music arrowNavigation;
 	sf::Music arrowEnter;
+
 };
 

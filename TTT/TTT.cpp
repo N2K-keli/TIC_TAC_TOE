@@ -22,52 +22,63 @@ int main()
 	StateManager stateManagerObject;
 	AudioManager audioManagerObject;
 	
-	while (window.isOpen())
-	{
-		
-	
-		while(std::optional<sf::Event> event = window.pollEvent())
-		{
-			if( (*event).is<sf::Event::Closed>() )
-			{
-				window.close();
-			}
-			if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
-			{
-				sceneManagerObject.getMenuScene().updateMenuIndex(*event, audioManagerObject);
-			}
-			
-		
-		}
-		
+   
+    while (window.isOpen())  
+    {
+        while (std::optional<sf::Event> event = window.pollEvent())
+        {
+            if ((*event).is<sf::Event::Closed>())
+            {
+                window.close();
+            }
+            if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
+            {
+                sceneManagerObject.getMenuScene().updateMenuIndex(*event, audioManagerObject);
+            }
+            if (stateManagerObject.getcurrentSceneState() == SceneState::options)
+            {
+                sceneManagerObject.getOptionsScene().updateOptionIndex(*event, audioManagerObject);
+            }
+        }
 
-		if(stateManagerObject.getcurrentSceneState() == SceneState::intro)
-		{
-			audioManagerObject.getIntroAudio().play();
-			sceneManagerObject.getIntroScene().LoadIntro(window);
-			window.clear();
-			stateManagerObject.setcurrentSceneState(SceneState::menu);
-			
+        if (stateManagerObject.getcurrentSceneState() == SceneState::intro)
+        {
+            audioManagerObject.getIntroAudio().play();
+            sceneManagerObject.getIntroScene().LoadIntro(window);
+            window.clear();
+            stateManagerObject.setcurrentSceneState(SceneState::menu);
+        }
+        if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
+        {
+            audioManagerObject.getMenuAudio().play();
+            window.clear();
+            sceneManagerObject.getMenuScene().drawMenu(window);
 
-		}
+            if (sceneManagerObject.getMenuScene().goToOptions)
+            {
+                sceneManagerObject.getMenuScene().goToOptions = false;
+                stateManagerObject.setcurrentSceneState(SceneState::options);
+            }
+            if (sceneManagerObject.getMenuScene().shouldExit)
+            {
+                audioManagerObject.getMenuAudio().stop();
+                audioManagerObject.getIntroAudio().stop();
+                window.close();
+            }
+        }
+        if (stateManagerObject.getcurrentSceneState() == SceneState::options)
+        {
+            window.clear();
+            sceneManagerObject.getOptionsScene().drawOptions(window);
 
+            if (sceneManagerObject.getOptionsScene().goBack)
+            {
+                sceneManagerObject.getOptionsScene().goBack = false;
+                stateManagerObject.setcurrentSceneState(SceneState::menu);
+            }
+        }
 
-		if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
-		{
-			audioManagerObject.getMenuAudio().play();
-			window.clear();
-			sceneManagerObject.getMenuScene().drawMenu(window);
-			if (sceneManagerObject.getMenuScene().shouldExit) 
-			{
-				audioManagerObject.getMenuAudio().stop();    
-				audioManagerObject.getIntroAudio().stop();
-				window.close();
-			}
-			
-
-		}
-		
-	}
+    } 
 
 	return 0;
 }

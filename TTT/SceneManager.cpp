@@ -20,3 +20,7 @@ MenuScene& SceneManager::getMenuScene()
 {
     return menuScene;
 }
+OptionsScene& SceneManager::getOptionsScene()
+{
+    return optionsScene;
+}

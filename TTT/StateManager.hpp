@@ -7,6 +7,7 @@ enum SceneState
 {
 	intro, 
 	menu , 
+	options,
 
 };
 

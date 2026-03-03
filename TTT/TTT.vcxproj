@@ -135,6 +135,7 @@
     <ClCompile Include="MenuAudio.cpp" />
     <ClCompile Include="MenuScene.cpp" />
     <ClCompile Include="NavigationHelper.cpp" />
+    <ClCompile Include="OptionsScene.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="MenuAudio.hpp" />
     <ClInclude Include="MenuScene.hpp" />
     <ClInclude Include="NavigationHelper.hpp" />
+    <ClInclude Include="OptionsScene.hpp" />
     <ClInclude Include="SceneManager.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="TextHelper.hpp" />

@@ -70,3 +70,13 @@ void MenuAudio::arrowNavigationStop()
 {
     arrowNavigation.stop();
 }
+
+void MenuAudio::setMusicVolume(float volume)
+{
+    music.setVolume(volume);
+}
+void MenuAudio::setSFXVolume(float volume)
+{
+    arrowNavigation.setVolume(volume);
+    arrowEnter.setVolume(volume);
+}

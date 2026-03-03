@@ -12,6 +12,7 @@ public:
     void updateMenuIndex(const sf::Event& event , AudioManager& audio);
     int selectedIndex = 0;
     bool shouldExit = false;
+    bool goToOptions = false;
     
 
 

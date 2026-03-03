@@ -64,28 +64,15 @@ void MenuScene::updateMenuIndex(const sf::Event& event, AudioManager& audio)
 
     if (showExitConfirm)
     {
-      
-        if (key->scancode == sf::Keyboard::Scancode::Up ||
-            key->scancode == sf::Keyboard::Scancode::Down)
+        if (key->scancode == sf::Keyboard::Scancode::Up || key->scancode == sf::Keyboard::Scancode::Down)
         {
-           
-            if (confirmIndex == 0) 
-            {
-                confirmIndex = 1;
-            }
-            else
-            {
-                confirmIndex = 0;
-            }
+            confirmIndex = (confirmIndex == 0) ? 1 : 0;
             audio.getMenuAudio().arrowNavigationPlay();
         }
         else if (key->scancode == sf::Keyboard::Scancode::Enter)
         {
             audio.getMenuAudio().arrowEnterPlay();
-            if (confirmIndex == 0) 
-            {
-                shouldExit = true;
-            }
+            if (confirmIndex == 0) shouldExit = true;  
             else
             {
                 showExitConfirm = false; 
@@ -95,15 +82,21 @@ void MenuScene::updateMenuIndex(const sf::Event& event, AudioManager& audio)
     }
     else
     {
-        
         selectedIndex = NavigationHelper::moveUpDown(event, selectedIndex, 4, audio.getMenuAudio());
 
-        
-        if (key->scancode == sf::Keyboard::Scancode::Enter && selectedIndex == 3)
+        if (key->scancode == sf::Keyboard::Scancode::Enter)
         {
-            audio.getMenuAudio().arrowEnterPlay();
-            showExitConfirm = true;
-            confirmIndex = 0;
+            if (selectedIndex == 2) // OPTIONS
+            {
+                audio.getMenuAudio().arrowEnterPlay();
+                goToOptions = true;
+            }
+            else if (selectedIndex == 3) // EXIT
+            {
+                audio.getMenuAudio().arrowEnterPlay();
+                showExitConfirm = true;
+                confirmIndex = 0;
+            }
         }
     }
 }
