@@ -3,12 +3,13 @@
 #include <string>
 #include "Arrow.hpp"
 #include "TextHelper.hpp"
+#include "AudioManager.hpp"
 
 class MenuScene
 {
 public:
 	void drawMenu(sf::RenderWindow& window);
-    void updateMenuIndex(const sf::Event& event);
+    void updateMenuIndex(const sf::Event& event , AudioManager& audio);
     int selectedIndex = 0;
     
 

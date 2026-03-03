@@ -16,9 +16,9 @@ void MenuScene::drawMenu(sf::RenderWindow& window)
     window.draw(arrow.getArrowSprite()); 
     window.display();                   
 }
-void MenuScene::updateMenuIndex(const sf::Event& event)
+void MenuScene::updateMenuIndex(const sf::Event& event, AudioManager& audio)
 {
-    selectedIndex = NavigationHelper::moveUpDown(event, selectedIndex, 4);
+    selectedIndex = NavigationHelper::moveUpDown(event, selectedIndex, 4, audio.getMenuAudio());
     std::cout << "selectedIndex: " << selectedIndex << "\n";
 
 }

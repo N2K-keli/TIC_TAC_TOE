@@ -13,7 +13,30 @@ MenuAudio::MenuAudio()
     }
 
     music.setLooping(true);
-}
+
+    if (!arrowNavigation.openFromFile("assets/audio/arrowNavigation.mp3"))
+    {
+        std::cerr << "Error: Could not load arrowNavigation intro music\n";
+    }
+    else
+    {
+        std::cout << "SUCCESS! arrowNavigation music loaded!\n";
+    }
+
+    arrowNavigation.setLooping(false);
+
+    if (!arrowEnter.openFromFile("assets/audio/arrowEnter.mp3"))
+        {
+            std::cerr << "Error: Could not load arrowEnter music\n";
+        }
+    else
+        {
+            std::cout << "SUCCESS! arrowEnter music loaded!\n";
+        }
+
+        arrowEnter.setLooping(false);
+    }
+
 void MenuAudio::play() 
 {
     if (music.getStatus() != sf::Music::Status::Playing)
@@ -26,4 +49,24 @@ void MenuAudio::stop()
 {
     music.stop();
     
+}
+
+void MenuAudio::arrowEnterPlay()
+{
+    arrowEnter.play(); 
+}
+
+void MenuAudio::arrowEnterStop()
+{
+    arrowEnter.stop();
+}
+
+void MenuAudio::arrowNavigationPlay()
+{
+    arrowNavigation.play();
+}
+
+void MenuAudio::arrowNavigationStop()
+{
+    arrowNavigation.stop();
 }

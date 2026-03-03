@@ -34,7 +34,7 @@ int main()
 			}
 			if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
 			{
-				sceneManagerObject.getMenuScene().updateMenuIndex(*event);
+				sceneManagerObject.getMenuScene().updateMenuIndex(*event, audioManagerObject);
 			}
 			
 		
