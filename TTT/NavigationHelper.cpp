@@ -17,7 +17,6 @@ int NavigationHelper::moveUpDown( const sf::Event& event, int currentIndex, int 
 		if(key->scancode == sf::Keyboard::Scancode::Up) 
 		{
 			
-			
 			currentIndex = currentIndex - 1;
 			
 			if(currentIndex < 0 ) 
@@ -34,6 +33,10 @@ int NavigationHelper::moveUpDown( const sf::Event& event, int currentIndex, int 
 			}
 			audio.arrowNavigationPlay();
 		
+		}
+		else if (key->scancode == sf::Keyboard::Scancode::Enter) // ? separate block
+		{
+			audio.arrowEnterPlay(); 
 		}
 		
 	}
