@@ -5,9 +5,15 @@
 
 enum SceneState 
 {
-	intro, 
-	menu , 
+	intro,
+	menu,
 	options,
+	level1,
+	level2,
+	level3,
+	level4,
+	level5,
+	level6,
 
 };
 
