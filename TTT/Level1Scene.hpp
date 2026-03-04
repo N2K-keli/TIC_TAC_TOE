@@ -19,11 +19,16 @@ public:
     void onEnter(sf::RenderWindow& window);
     void handleEvent(const sf::Event& event, AudioManager& audio);
     void draw(sf::RenderWindow& window, AudioManager& audio);
+    bool goToGameOver = false;
 
     bool hasEntered = false;
+    GameManager::Result getResult()     const { return gameManager.getResult(); }
+    int                 getPlayerScore() const { return gameManager.getPlayerScore(); }
+    int                 getCPUScore()    const { return gameManager.getCPUScore(); }
 
 private:
     sf::RenderWindow* window = nullptr;
+    
     int cursorRow = 0;
     int cursorCol = 0;
 

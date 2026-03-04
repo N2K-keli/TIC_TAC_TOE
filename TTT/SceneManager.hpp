@@ -10,6 +10,7 @@
 #include "Level4Scene.hpp"
 #include "Level5Scene.hpp"
 #include "Level6Scene.hpp"
+#include "GameOverScene.hpp"
 
 class SceneManager
 {
@@ -26,6 +27,7 @@ public:
 	Level4Scene& getLevel4Scene();
 	Level5Scene& getLevel5Scene();
 	Level6Scene& getLevel6Scene();
+	GameOverScene& getGameOverScene();
 
 	sf::RenderWindow& getWindow();
 
@@ -42,5 +44,6 @@ private:
 	Level5Scene  level5Scene;
 	Level6Scene  level6Scene;
 	sf::RenderWindow& window;
+	GameOverScene gameOverScene;
 	
 };

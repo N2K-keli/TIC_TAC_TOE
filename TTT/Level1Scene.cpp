@@ -150,6 +150,10 @@ void Level1Scene::draw(sf::RenderWindow& window, AudioManager& audio)
                     cursorCol = 0;
                     std::cout << "Starting next round\n";
                 }
+                else
+                {
+                    goToGameOver = true; //  signal TTT.cpp to transition
+                }
                 // if match over, TTT.cpp will handle transition to GameOverScene
             }
         }

@@ -7,6 +7,7 @@ enum SceneState
 {
 	intro,
 	menu,
+	gameOver,
 	options,
 	level1,
 	level2,

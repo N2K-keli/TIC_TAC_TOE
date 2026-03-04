@@ -15,7 +15,6 @@
 
 int main()
 {
-
     Board chessBoard;
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u{ 800, 600 }), "TIC TAC TOE");
     IntroScene introSceneObject(window);
@@ -23,7 +22,7 @@ int main()
     StateManager stateManagerObject;
     AudioManager audioManagerObject;
 
-    std::srand(std::time(nullptr)); 
+    std::srand(std::time(nullptr));
 
     while (window.isOpen())
     {
@@ -34,14 +33,13 @@ int main()
                 window.close();
             }
 
-            // handle resize globally — update view for any state
             if (event->is<sf::Event::Resized>())
             {
                 sf::FloatRect visibleArea({ 0.f, 0.f }, {
                     (float)window.getSize().x,
                     (float)window.getSize().y
                     });
-                window.setView(sf::View(visibleArea)); //  update SFML view to match new size
+                window.setView(sf::View(visibleArea));
             }
 
             if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
@@ -58,6 +56,10 @@ int main()
                 {
                     sceneManagerObject.getLevel1Scene().handleEvent(*event, audioManagerObject);
                 }
+            }
+            if (stateManagerObject.getcurrentSceneState() == SceneState::gameOver)
+            {
+                sceneManagerObject.getGameOverScene().handleEvent(*event, audioManagerObject);
             }
         }
 
@@ -111,14 +113,57 @@ int main()
             }
         }
 
-        // ---- LEVEL 1 ----
+        // ---- LEVEL 1 ----  replaced
         if (stateManagerObject.getcurrentSceneState() == SceneState::level1)
         {
             if (audioManagerObject.getLevel1Audio().isFinished())
             {
                 window.clear();
-                //  pass both window and audioManager
                 sceneManagerObject.getLevel1Scene().draw(window, audioManagerObject);
+
+                if (sceneManagerObject.getLevel1Scene().goToGameOver)
+                {
+                    sceneManagerObject.getLevel1Scene().goToGameOver = false;
+                    audioManagerObject.getLevel1GameAudio().stop();
+
+                    sceneManagerObject.getGameOverScene().init(window);
+                    sceneManagerObject.getGameOverScene().setup(
+                        sceneManagerObject.getLevel1Scene().getResult(),
+                        sceneManagerObject.getLevel1Scene().getPlayerScore(),
+                        sceneManagerObject.getLevel1Scene().getCPUScore(),
+                        audioManagerObject
+                    );
+                    stateManagerObject.setcurrentSceneState(SceneState::gameOver);
+                }
+            }
+        }
+
+        // ---- GAME OVER ----  new
+        if (stateManagerObject.getcurrentSceneState() == SceneState::gameOver)
+        {
+            window.clear();
+            sceneManagerObject.getGameOverScene().draw(window);
+
+            if (sceneManagerObject.getGameOverScene().goPlayAgain)
+            {
+                sceneManagerObject.getGameOverScene().goPlayAgain = false;
+                audioManagerObject.getGameWinAudio().stop();
+                audioManagerObject.getGameLoseAudio().stop();
+                audioManagerObject.getGameDrawAudio().stop();
+
+                //  reset level 1 fully
+                sceneManagerObject.getLevel1Scene().hasEntered = false;
+                sceneManagerObject.getLevel1Scene().goToGameOver = false;
+                stateManagerObject.setcurrentSceneState(SceneState::level1);
+                audioManagerObject.getLevel1Audio().play();
+            }
+            if (sceneManagerObject.getGameOverScene().goBackToMenu)
+            {
+                sceneManagerObject.getGameOverScene().goBackToMenu = false;
+                audioManagerObject.getGameWinAudio().stop();
+                audioManagerObject.getGameLoseAudio().stop();
+                audioManagerObject.getGameDrawAudio().stop();
+                stateManagerObject.setcurrentSceneState(SceneState::menu);
             }
         }
 

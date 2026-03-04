@@ -22,3 +22,4 @@ Level3Scene& SceneManager::getLevel3Scene() { return level3Scene; }
 Level4Scene& SceneManager::getLevel4Scene() { return level4Scene; }
 Level5Scene& SceneManager::getLevel5Scene() { return level5Scene; }
 Level6Scene& SceneManager::getLevel6Scene() { return level6Scene; }
+GameOverScene& SceneManager::getGameOverScene() { return gameOverScene; }

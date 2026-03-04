@@ -136,6 +136,7 @@
     <ClCompile Include="GameDrawAudio.cpp" />
     <ClCompile Include="GameLoseAudio.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameOverScene.cpp" />
     <ClCompile Include="GameWinAudio.cpp" />
     <ClCompile Include="GridSizeInput.cpp" />
     <ClCompile Include="IntroAudio.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="GameDrawAudio.hpp" />
     <ClInclude Include="GameLoseAudio.hpp" />
     <ClInclude Include="GameManager.hpp" />
+    <ClInclude Include="GameOverScene.hpp" />
     <ClInclude Include="GameWinAudio.hpp" />
     <ClInclude Include="GridSizeInput.hpp" />
     <ClInclude Include="include\Board.hpp" />
