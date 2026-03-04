@@ -23,18 +23,19 @@ void Level1Scene::onEnter(sf::RenderWindow& win)
         playerRender.init(win);
         cpuRender.init(win);
         gridSizeInput.init(win);
+        roundOverScreen.init(win); 
         gridSizeInput.reset();
 
         hasEntered = true;
         gameStarted = false;
     }
 }
-
 void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
 {
     if (event.is<sf::Event::Resized>())
     {
         gridSizeInput.init(*window);
+        roundOverScreen.init(*window);
         if (gameStarted)
         {
             boardRender.init(board.getSize(), *window, "assets/images/game_background2.jpg");
@@ -52,7 +53,7 @@ void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
             int size = gridSizeInput.getGridSize();
             board.init(size);
             boardRender.init(size, *window, "assets/images/game_background2.jpg");
-            gameManager.init(size); //  initialize game manager with grid size
+            gameManager.init(size);
             audio.getLevel1GameAudio().play();
             gameStarted = true;
             cursorRow = 0;
@@ -62,10 +63,11 @@ void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
     }
     else
     {
+        if (roundOverActive) return; //  block all input during round over screen
+
         if (!event.is<sf::Event::KeyPressed>()) return;
         auto* key = event.getIf<sf::Event::KeyPressed>();
 
-        //  only allow input if game is not over
         if (!gameManager.isGameOver())
         {
             if (key->scancode == sf::Keyboard::Scancode::Up)
@@ -88,21 +90,33 @@ void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
                 if (cursorCol < board.getSize() - 1) cursorCol++;
                 audio.getMenuAudio().arrowNavigationPlay();
             }
-            else if (key->scancode == sf::Keyboard::Scancode::Enter)
+            else if (key->scancode == sf::Keyboard::Scancode::Enter) //  place symbol
             {
-                //  player places symbol
                 bool valid = gameManager.handlePlayerMove(cursorRow, cursorCol, board);
 
                 if (valid && !gameManager.isGameOver())
                 {
-                    //  CPU takes its turn immediately after player
                     gameManager.handleCPUMove(board, cpu);
+                }
+
+                //  check if round just ended
+                if (gameManager.isGameOver())
+                {
+                    std::string winnerMsg;
+                    if (gameManager.getResult() == GameManager::Result::playerWin)
+                        winnerMsg = "PLAYER WINS!";
+                    else if (gameManager.getResult() == GameManager::Result::cpuWin)
+                        winnerMsg = "CPU WINS!";
+                    else
+                        winnerMsg = "DRAW!";
+
+                    roundOverScreen.show(gameManager.getRoundNumber() - 1, winnerMsg);
+                    roundOverActive = true;
                 }
             }
         }
     }
 }
-
 void Level1Scene::draw(sf::RenderWindow& window, AudioManager& audio)
 {
     onEnter(window);
@@ -116,6 +130,30 @@ void Level1Scene::draw(sf::RenderWindow& window, AudioManager& audio)
         boardRender.draw(window, board, player, cpu, cursorRow, cursorCol);
         playerRender.draw(window, player);
         cpuRender.draw(window, cpu);
+
+        if (roundOverActive)
+        {
+            roundOverScreen.update(); 
+            roundOverScreen.draw(window); 
+
+            if (roundOverScreen.isFinished())
+            {
+                roundOverActive = false;
+                roundOverScreen.reset();
+
+                if (!gameManager.isMatchOver())
+                {
+                    //  start next round
+                    board.init(board.getSize());
+                    gameManager.reset();
+                    cursorRow = 0;
+                    cursorCol = 0;
+                    std::cout << "Starting next round\n";
+                }
+                // if match over, TTT.cpp will handle transition to GameOverScene
+            }
+        }
+
         window.display();
     }
 }

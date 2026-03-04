@@ -133,7 +133,10 @@
     <ClCompile Include="BoardRender.cpp" />
     <ClCompile Include="CPU.cpp" />
     <ClCompile Include="CPURender.cpp" />
+    <ClCompile Include="GameDrawAudio.cpp" />
+    <ClCompile Include="GameLoseAudio.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameWinAudio.cpp" />
     <ClCompile Include="GridSizeInput.cpp" />
     <ClCompile Include="IntroAudio.cpp" />
     <ClCompile Include="IntroScene.cpp" />
@@ -166,6 +169,7 @@
     <ClCompile Include="OptionsScene.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerRender.cpp" />
+    <ClCompile Include="RoundOverScreen.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -179,7 +183,10 @@
     <ClInclude Include="CPU.hpp" />
     <ClInclude Include="CPURender.hpp" />
     <ClInclude Include="CPUStrategy.hpp" />
+    <ClInclude Include="GameDrawAudio.hpp" />
+    <ClInclude Include="GameLoseAudio.hpp" />
     <ClInclude Include="GameManager.hpp" />
+    <ClInclude Include="GameWinAudio.hpp" />
     <ClInclude Include="GridSizeInput.hpp" />
     <ClInclude Include="include\Board.hpp" />
     <ClInclude Include="IntroAudio.hpp" />
@@ -205,6 +212,7 @@
     <ClInclude Include="OptionsScene.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerRender.hpp" />
+    <ClInclude Include="RoundOverScreen.hpp" />
     <ClInclude Include="SceneManager.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="TextHelper.hpp" />

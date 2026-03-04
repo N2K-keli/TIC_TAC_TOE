@@ -11,6 +11,7 @@
 #include "AudioManager.hpp"
 #include "Level1Strategy.hpp"
 #include "GameManager.hpp" 
+#include "RoundOverScreen.hpp"
 
 class Level1Scene
 {
@@ -36,6 +37,9 @@ private:
 
     GridSizeInput gridSizeInput;
     GameManager   gameManager; 
+
+    RoundOverScreen roundOverScreen; 
+    bool roundOverActive = false;
 
     bool gameStarted = false;
 };

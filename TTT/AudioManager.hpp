@@ -14,6 +14,9 @@
 #include "Level4GameAudio.hpp"
 #include "Level5GameAudio.hpp"
 #include "Level6GameAudio.hpp"
+#include "GameWinAudio.hpp"
+#include "GameLoseAudio.hpp"
+#include "GameDrawAudio.hpp"
 
 class AudioManager
 {
@@ -32,7 +35,9 @@ public:
 	Level4GameAudio& getLevel4GameAudio();
 	Level5GameAudio& getLevel5GameAudio();
 	Level6GameAudio& getLevel6GameAudio();
-
+	GameWinAudio& getGameWinAudio();
+	GameLoseAudio& getGameLoseAudio();
+	GameDrawAudio& getGameDrawAudio();
 	
 	
 private:
@@ -50,6 +55,9 @@ private:
 	Level4GameAudio level4GameAudio;
 	Level5GameAudio level5GameAudio;
 	Level6GameAudio level6GameAudio;
+	GameWinAudio  gameWinAudio;
+	GameLoseAudio gameLoseAudio;
+	GameDrawAudio gameDrawAudio;
 	
 };
 

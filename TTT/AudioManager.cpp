@@ -22,3 +22,6 @@ Level3GameAudio& AudioManager::getLevel3GameAudio() { return level3GameAudio; }
 Level4GameAudio& AudioManager::getLevel4GameAudio() { return level4GameAudio; }
 Level5GameAudio& AudioManager::getLevel5GameAudio() { return level5GameAudio; }
 Level6GameAudio& AudioManager::getLevel6GameAudio() { return level6GameAudio; }
+GameWinAudio& AudioManager::getGameWinAudio() { return gameWinAudio; }
+GameLoseAudio& AudioManager::getGameLoseAudio() { return gameLoseAudio; }
+GameDrawAudio& AudioManager::getGameDrawAudio() { return gameDrawAudio; }
