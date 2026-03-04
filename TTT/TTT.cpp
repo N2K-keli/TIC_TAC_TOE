@@ -28,6 +28,17 @@ int main()
             {
                 window.close();
             }
+
+            // handle resize globally — update view for any state
+            if (event->is<sf::Event::Resized>())
+            {
+                sf::FloatRect visibleArea({ 0.f, 0.f }, {
+                    (float)window.getSize().x,
+                    (float)window.getSize().y
+                    });
+                window.setView(sf::View(visibleArea)); //  update SFML view to match new size
+            }
+
             if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
             {
                 sceneManagerObject.getMenuScene().updateMenuIndex(*event, audioManagerObject);
@@ -36,7 +47,6 @@ int main()
             {
                 sceneManagerObject.getOptionsScene().updateOptionIndex(*event, audioManagerObject);
             }
-            // level 1 event handling — GridSizeInput listens here
             if (stateManagerObject.getcurrentSceneState() == SceneState::level1)
             {
                 if (audioManagerObject.getLevel1Audio().isFinished())

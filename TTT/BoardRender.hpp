@@ -12,9 +12,14 @@ public:
     void init(int gridSize, sf::RenderWindow& window, const std::string& backgroundPath);
     void draw(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu);
 
+    
+    float getCellSize()    const { return cellSize; }
+    float getBoardStartX() const { return boardStartX; }
+    float getBoardStartY() const { return boardStartY; }
+
 private:
     sf::Texture backgroundTexture;
-    std::optional<sf::Sprite> backgroundSprite; // 
+    std::optional<sf::Sprite> backgroundSprite; 
 
     float cellSize = 0.f;
     float boardStartX = 0.f;

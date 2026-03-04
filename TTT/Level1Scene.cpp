@@ -21,6 +21,7 @@ void Level1Scene::onEnter(sf::RenderWindow& win)
 
         playerRender.init(win);
         cpuRender.init(win);
+        gridSizeInput.init(win);
         gridSizeInput.reset();
 
         hasEntered = true;
@@ -30,21 +31,29 @@ void Level1Scene::onEnter(sf::RenderWindow& win)
 
 void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
 {
+    // handle window resize — recalculate all proportions
+    if (event.is<sf::Event::Resized>())
+    {
+        gridSizeInput.init(*window);
+        if (gameStarted)
+        {
+            boardRender.init(board.getSize(), *window, "assets/images/game_background2.jpg");
+            playerRender.init(*window);
+            cpuRender.init(*window);
+        }
+        return;
+    }
+
     if (!gameStarted)
     {
         gridSizeInput.handleEvent(event, audio);
-
         if (gridSizeInput.isConfirmed())
         {
             int size = gridSizeInput.getGridSize();
-
             board.init(size);
-            boardRender.init(size, *window, //  use stored window pointer
-                "assets/images/game_background2.jpg");
-
-            audio.getLevel1GameAudio().play(); // start game audio on confirm
+            boardRender.init(size, *window, "assets/images/game_background2.jpg");
+            audio.getLevel1GameAudio().play();
             gameStarted = true;
-
             std::cout << "Level 1 started with grid size: " << size << "\n";
         }
     }

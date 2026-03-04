@@ -10,19 +10,30 @@ void BoardRender::init(int size, sf::RenderWindow& window, const std::string& ba
         std::cout << "SUCCESS! Background loaded: " << backgroundPath << "\n";
 
     sf::Vector2u windowSize = window.getSize();
-    float scaleX = (float)windowSize.x / backgroundTexture.getSize().x;
-    float scaleY = (float)windowSize.y / backgroundTexture.getSize().y;
+    float winW = (float)windowSize.x;
+    float winH = (float)windowSize.y;
 
-    backgroundSprite.emplace(backgroundTexture); //  create sprite with texture
-    backgroundSprite->setScale({ scaleX, scaleY });
+    // background scales to fill entire window
+    backgroundSprite.emplace(backgroundTexture);
+    backgroundSprite->setScale({
+        winW / backgroundTexture.getSize().x,
+        winH / backgroundTexture.getSize().y
+        });
 
-    float boardAreaWidth = (float)windowSize.x - 400.f;
-    float boardAreaHeight = (float)windowSize.y - 100.f;
+    //  panels are 20% of window width each side
+    float panelWidth = winW * 0.20f;
+
+    //  board area is the middle 60% of window width, 90% of height
+    float boardAreaWidth = winW * 0.60f;
+    float boardAreaHeight = winH * 0.90f;
+
+    //  cell size based on smallest dimension to keep cells square
     cellSize = std::min(boardAreaWidth, boardAreaHeight) / gridSize;
 
+    //  center board in middle zone proportionally
     float boardTotalSize = cellSize * gridSize;
-    boardStartX = 200.f + (boardAreaWidth - boardTotalSize) / 2.f;
-    boardStartY = 50.f + (boardAreaHeight - boardTotalSize) / 2.f;
+    boardStartX = panelWidth + (boardAreaWidth - boardTotalSize) / 2.f;
+    boardStartY = (winH - boardTotalSize) / 2.f; //  vertically centered
 
     std::cout << "BoardRender initialized — gridSize: " << gridSize
         << " cellSize: " << cellSize << "\n";
@@ -37,7 +48,7 @@ void BoardRender::draw(sf::RenderWindow& window, Board& board, Player& player, C
 void BoardRender::drawBackground(sf::RenderWindow& window)
 {
     if (backgroundSprite.has_value())
-        window.draw(*backgroundSprite); //  dereference with *
+        window.draw(*backgroundSprite);
 }
 
 void BoardRender::drawGrid(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu)
@@ -67,7 +78,7 @@ void BoardRender::drawGrid(sf::RenderWindow& window, Board& board, Player& playe
 
 void BoardRender::drawSymbol(sf::RenderWindow& window, sf::Texture& texture, int row, int col)
 {
-    sf::Sprite symbol(texture); //  constructed with texture directly — no optional needed
+    sf::Sprite symbol(texture);
     float padding = cellSize * 0.1f;
     float symbolSize = cellSize - (padding * 2.f);
     sf::Vector2u texSize = texture.getSize();
