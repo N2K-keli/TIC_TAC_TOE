@@ -36,6 +36,14 @@ int main()
             {
                 sceneManagerObject.getOptionsScene().updateOptionIndex(*event, audioManagerObject);
             }
+            // level 1 event handling — GridSizeInput listens here
+            if (stateManagerObject.getcurrentSceneState() == SceneState::level1)
+            {
+                if (audioManagerObject.getLevel1Audio().isFinished())
+                {
+                    sceneManagerObject.getLevel1Scene().handleEvent(*event, audioManagerObject);
+                }
+            }
         }
 
         // ---- INTRO ----
@@ -66,9 +74,7 @@ int main()
                 window.close();
             }
 
-            // level transitions — stop menu music, play level audio, switch state
             auto& menu = sceneManagerObject.getMenuScene();
-
             if (menu.goToLevel1) { menu.goToLevel1 = false; audioManagerObject.getMenuAudio().stop(); audioManagerObject.getLevel1Audio().play(); stateManagerObject.setcurrentSceneState(SceneState::level1); }
             if (menu.goToLevel2) { menu.goToLevel2 = false; audioManagerObject.getMenuAudio().stop(); audioManagerObject.getLevel2Audio().play(); stateManagerObject.setcurrentSceneState(SceneState::level2); }
             if (menu.goToLevel3) { menu.goToLevel3 = false; audioManagerObject.getMenuAudio().stop(); audioManagerObject.getLevel3Audio().play(); stateManagerObject.setcurrentSceneState(SceneState::level3); }
@@ -93,11 +99,11 @@ int main()
         // ---- LEVEL 1 ----
         if (stateManagerObject.getcurrentSceneState() == SceneState::level1)
         {
-            //  wait for level audio to finish before drawing the scene
             if (audioManagerObject.getLevel1Audio().isFinished())
             {
                 window.clear();
-                sceneManagerObject.getLevel1Scene().draw(window);
+                //  pass both window and audioManager
+                sceneManagerObject.getLevel1Scene().draw(window, audioManagerObject);
             }
         }
 

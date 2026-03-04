@@ -1,15 +1,25 @@
 #pragma once
-#include <SFML\Graphics.hpp>
+#include <vector>
+#include <iostream>
+
+enum class CellState
+{
+    empty,
+    player,
+    cpu
+};
 
 class Board
 {
-	private:
+public:
+    Board();                         
+    void init(int size);             
+    void reset();                     
+    int getSize();                    
+    CellState getCell(int row, int col);         
+    void setCell(int row, int col, CellState state);
 
-	public:
-
-	void worrkingBoard();
-
-
-
+private:
+    int gridSize = 3;
+    std::vector<std::vector<CellState>> grid;
 };
-

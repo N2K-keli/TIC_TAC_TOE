@@ -6,24 +6,16 @@
 #include <vector>
 #include <SFML\Window\Keyboard.hpp>
 using namespace std::chrono_literals;
-// constructor
-SceneManager::SceneManager(sf::RenderWindow& window, IntroScene introscene): introScene(introscene)  
+
+SceneManager::SceneManager(sf::RenderWindow& window, IntroScene introscene)
+    : introScene(introscene), window(window) //  store window reference
 {
 }
 
-IntroScene& SceneManager::getIntroScene()
-{
-    return introScene;
-}
-
-MenuScene& SceneManager::getMenuScene()
-{
-    return menuScene;
-}
-OptionsScene& SceneManager::getOptionsScene()
-{
-    return optionsScene;
-}
+sf::RenderWindow& SceneManager::getWindow() { return window; }
+IntroScene& SceneManager::getIntroScene() { return introScene; }
+MenuScene& SceneManager::getMenuScene() { return menuScene; }
+OptionsScene& SceneManager::getOptionsScene() { return optionsScene; }
 Level1Scene& SceneManager::getLevel1Scene() { return level1Scene; }
 Level2Scene& SceneManager::getLevel2Scene() { return level2Scene; }
 Level3Scene& SceneManager::getLevel3Scene() { return level3Scene; }

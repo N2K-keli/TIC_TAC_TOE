@@ -27,6 +27,8 @@ public:
 	Level5Scene& getLevel5Scene();
 	Level6Scene& getLevel6Scene();
 
+	sf::RenderWindow& getWindow();
+
 private:
 	
 	
@@ -39,5 +41,6 @@ private:
 	Level4Scene  level4Scene;
 	Level5Scene  level5Scene;
 	Level6Scene  level6Scene;
+	sf::RenderWindow& window;
 	
 };
