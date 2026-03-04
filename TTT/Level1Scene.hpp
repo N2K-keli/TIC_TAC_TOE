@@ -9,11 +9,13 @@
 #include "CPURender.hpp"
 #include "GridSizeInput.hpp"
 #include "AudioManager.hpp"
+#include "Level1Strategy.hpp"
+#include "GameManager.hpp" 
 
 class Level1Scene
 {
 public:
-    void onEnter(sf::RenderWindow& window);   //  called once when level is entered
+    void onEnter(sf::RenderWindow& window);
     void handleEvent(const sf::Event& event, AudioManager& audio);
     void draw(sf::RenderWindow& window, AudioManager& audio);
 
@@ -21,21 +23,19 @@ public:
 
 private:
     sf::RenderWindow* window = nullptr;
-    int cursorRow = 0; 
-    int cursorCol = 0; 
+    int cursorRow = 0;
+    int cursorCol = 0;
 
-    //  data classes
     Board  board;
     Player player;
     CPU    cpu;
 
-    //  render classes
     BoardRender  boardRender;
     PlayerRender playerRender;
     CPURender    cpuRender;
 
-    //  grid size input
     GridSizeInput gridSizeInput;
+    GameManager   gameManager; 
 
-    bool gameStarted = false; //  true after grid size confirmed
+    bool gameStarted = false;
 };

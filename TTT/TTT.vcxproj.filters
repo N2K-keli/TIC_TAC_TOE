@@ -63,16 +63,10 @@
     <ClCompile Include="Level2Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Level4Audio.hpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Level6Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Level5Audio.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level4Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Level3Audio.cpp">
@@ -142,6 +136,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CPURender.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1Strategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level4Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -237,6 +240,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPURender.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPUStrategy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1Strategy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level4Audio.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

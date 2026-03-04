@@ -10,15 +10,20 @@
 #include "AudioManager.hpp"
 #include "IntroAudio.hpp"
 #include "MenuScene.hpp"
+#include <cstdlib>
+#include <ctime>
 
 int main()
 {
+
     Board chessBoard;
     sf::RenderWindow window(sf::VideoMode(sf::Vector2u{ 800, 600 }), "TIC TAC TOE");
     IntroScene introSceneObject(window);
     SceneManager sceneManagerObject(window, introSceneObject);
     StateManager stateManagerObject;
     AudioManager audioManagerObject;
+
+    std::srand(std::time(nullptr)); 
 
     while (window.isOpen())
     {

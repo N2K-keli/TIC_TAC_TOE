@@ -1,12 +1,11 @@
 #include "Level1Scene.hpp"
+#include "Level1Strategy.hpp"
 
 void Level1Scene::onEnter(sf::RenderWindow& win)
 {
     if (!hasEntered)
     {
-        std::cout << "Entering Level 1\n";
-
-        window = &win; //  store window pointer for later use
+        window = &win;
 
         player.init(
             "assets/images/level1_player_symbol.png",
@@ -18,6 +17,8 @@ void Level1Scene::onEnter(sf::RenderWindow& win)
             "assets/images/level1_cpu_picture.png",
             "CPU"
         );
+
+        cpu.setStrategy(new Level1Strategy());
 
         playerRender.init(win);
         cpuRender.init(win);
@@ -51,38 +52,53 @@ void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
             int size = gridSizeInput.getGridSize();
             board.init(size);
             boardRender.init(size, *window, "assets/images/game_background2.jpg");
+            gameManager.init(size); //  initialize game manager with grid size
             audio.getLevel1GameAudio().play();
             gameStarted = true;
-            cursorRow = 0; //  reset cursor
+            cursorRow = 0;
             cursorCol = 0;
             std::cout << "Level 1 started with grid size: " << size << "\n";
         }
     }
     else
     {
-        //  cursor movement
         if (!event.is<sf::Event::KeyPressed>()) return;
         auto* key = event.getIf<sf::Event::KeyPressed>();
 
-        if (key->scancode == sf::Keyboard::Scancode::Up)
+        //  only allow input if game is not over
+        if (!gameManager.isGameOver())
         {
-            if (cursorRow > 0) cursorRow--;
-            audio.getMenuAudio().arrowNavigationPlay();
-        }
-        else if (key->scancode == sf::Keyboard::Scancode::Down)
-        {
-            if (cursorRow < board.getSize() - 1) cursorRow++;
-            audio.getMenuAudio().arrowNavigationPlay();
-        }
-        else if (key->scancode == sf::Keyboard::Scancode::Left)
-        {
-            if (cursorCol > 0) cursorCol--;
-            audio.getMenuAudio().arrowNavigationPlay();
-        }
-        else if (key->scancode == sf::Keyboard::Scancode::Right)
-        {
-            if (cursorCol < board.getSize() - 1) cursorCol++;
-            audio.getMenuAudio().arrowNavigationPlay();
+            if (key->scancode == sf::Keyboard::Scancode::Up)
+            {
+                if (cursorRow > 0) cursorRow--;
+                audio.getMenuAudio().arrowNavigationPlay();
+            }
+            else if (key->scancode == sf::Keyboard::Scancode::Down)
+            {
+                if (cursorRow < board.getSize() - 1) cursorRow++;
+                audio.getMenuAudio().arrowNavigationPlay();
+            }
+            else if (key->scancode == sf::Keyboard::Scancode::Left)
+            {
+                if (cursorCol > 0) cursorCol--;
+                audio.getMenuAudio().arrowNavigationPlay();
+            }
+            else if (key->scancode == sf::Keyboard::Scancode::Right)
+            {
+                if (cursorCol < board.getSize() - 1) cursorCol++;
+                audio.getMenuAudio().arrowNavigationPlay();
+            }
+            else if (key->scancode == sf::Keyboard::Scancode::Enter)
+            {
+                //  player places symbol
+                bool valid = gameManager.handlePlayerMove(cursorRow, cursorCol, board);
+
+                if (valid && !gameManager.isGameOver())
+                {
+                    //  CPU takes its turn immediately after player
+                    gameManager.handleCPUMove(board, cpu);
+                }
+            }
         }
     }
 }
@@ -97,7 +113,6 @@ void Level1Scene::draw(sf::RenderWindow& window, AudioManager& audio)
     }
     else
     {
-        //  pass cursor position to boardRender
         boardRender.draw(window, board, player, cpu, cursorRow, cursorCol);
         playerRender.draw(window, player);
         cpuRender.draw(window, cpu);

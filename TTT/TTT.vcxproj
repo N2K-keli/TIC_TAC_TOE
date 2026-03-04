@@ -133,12 +133,14 @@
     <ClCompile Include="BoardRender.cpp" />
     <ClCompile Include="CPU.cpp" />
     <ClCompile Include="CPURender.cpp" />
+    <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GridSizeInput.cpp" />
     <ClCompile Include="IntroAudio.cpp" />
     <ClCompile Include="IntroScene.cpp" />
     <ClCompile Include="Level1Audio.cpp" />
     <ClCompile Include="Level1GameAudio.cpp" />
     <ClCompile Include="Level1Scene.cpp" />
+    <ClCompile Include="Level1Strategy.cpp" />
     <ClCompile Include="Level2Audio.cpp" />
     <ClCompile Include="Level2GameAudio.cpp" />
     <ClCompile Include="Level2Scene.cpp" />
@@ -146,7 +148,6 @@
     <ClCompile Include="Level3GameAudio.cpp" />
     <ClCompile Include="Level3Scene.cpp" />
     <ClCompile Include="Level4Audio.cpp" />
-    <ClCompile Include="Level4Audio.hpp" />
     <ClCompile Include="Level4GameAudio.cpp" />
     <ClCompile Include="Level4Scene.cpp" />
     <ClCompile Include="Level4Scene.hpp" />
@@ -177,6 +178,8 @@
     <ClInclude Include="BoardRender.hpp" />
     <ClInclude Include="CPU.hpp" />
     <ClInclude Include="CPURender.hpp" />
+    <ClInclude Include="CPUStrategy.hpp" />
+    <ClInclude Include="GameManager.hpp" />
     <ClInclude Include="GridSizeInput.hpp" />
     <ClInclude Include="include\Board.hpp" />
     <ClInclude Include="IntroAudio.hpp" />
@@ -184,12 +187,14 @@
     <ClInclude Include="Level1Audio.hpp" />
     <ClInclude Include="Level1GameAudio.hpp" />
     <ClInclude Include="Level1Scene.hpp" />
+    <ClInclude Include="Level1Strategy.hpp" />
     <ClInclude Include="Level2Audio.hpp" />
     <ClInclude Include="Level2GameAudio.hpp" />
     <ClInclude Include="Level2Scene.hpp" />
     <ClInclude Include="Level3Audio.hpp" />
     <ClInclude Include="Level3GameAudio.hpp" />
     <ClInclude Include="Level3Scene.hpp" />
+    <ClInclude Include="Level4Audio.hpp" />
     <ClInclude Include="Level4GameAudio.hpp" />
     <ClInclude Include="Level5Audio.hpp" />
     <ClInclude Include="Level6Audio.hpp" />
