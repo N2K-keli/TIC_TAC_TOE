@@ -21,6 +21,8 @@ public:
 
 private:
     sf::RenderWindow* window = nullptr;
+    int cursorRow = 0; 
+    int cursorCol = 0; 
 
     //  data classes
     Board  board;

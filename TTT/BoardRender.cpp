@@ -39,10 +39,11 @@ void BoardRender::init(int size, sf::RenderWindow& window, const std::string& ba
         << " cellSize: " << cellSize << "\n";
 }
 
-void BoardRender::draw(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu)
+void BoardRender::draw(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu,
+    int cursorRow, int cursorCol)
 {
     drawBackground(window);
-    drawGrid(window, board, player, cpu);
+    drawGrid(window, board, player, cpu, cursorRow, cursorCol);
 }
 
 void BoardRender::drawBackground(sf::RenderWindow& window)
@@ -51,7 +52,8 @@ void BoardRender::drawBackground(sf::RenderWindow& window)
         window.draw(*backgroundSprite);
 }
 
-void BoardRender::drawGrid(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu)
+void BoardRender::drawGrid(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu,
+    int cursorRow, int cursorCol)
 {
     for (int row = 0; row < gridSize; row++)
     {
@@ -62,7 +64,13 @@ void BoardRender::drawGrid(sf::RenderWindow& window, Board& board, Player& playe
                 boardStartX + col * cellSize,
                 boardStartY + row * cellSize
                 });
-            cell.setFillColor(cellColor);
+
+            //  highlight cursor cell golden yellow, rest stay brown
+            if (row == cursorRow && col == cursorCol)
+                cell.setFillColor(sf::Color(255, 215, 0)); // golden yellow
+            else
+                cell.setFillColor(cellColor);
+
             cell.setOutlineColor(borderColor);
             cell.setOutlineThickness(3.f);
             window.draw(cell);

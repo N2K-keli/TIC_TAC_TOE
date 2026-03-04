@@ -10,7 +10,7 @@ class BoardRender
 {
 public:
     void init(int gridSize, sf::RenderWindow& window, const std::string& backgroundPath);
-    void draw(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu);
+    void draw(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu, int cursorRow, int cursorCol);
 
     
     float getCellSize()    const { return cellSize; }
@@ -30,6 +30,6 @@ private:
     sf::Color borderColor{ 80,  40, 10 };
 
     void drawBackground(sf::RenderWindow& window);
-    void drawGrid(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu);
+    void drawGrid(sf::RenderWindow& window, Board& board, Player& player, CPU& cpu, int cursorRow, int cursorCol); 
     void drawSymbol(sf::RenderWindow& window, sf::Texture& texture, int row, int col);
 };

@@ -31,7 +31,6 @@ void Level1Scene::onEnter(sf::RenderWindow& win)
 
 void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
 {
-    // handle window resize — recalculate all proportions
     if (event.is<sf::Event::Resized>())
     {
         gridSizeInput.init(*window);
@@ -54,25 +53,52 @@ void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
             boardRender.init(size, *window, "assets/images/game_background2.jpg");
             audio.getLevel1GameAudio().play();
             gameStarted = true;
+            cursorRow = 0; //  reset cursor
+            cursorCol = 0;
             std::cout << "Level 1 started with grid size: " << size << "\n";
+        }
+    }
+    else
+    {
+        //  cursor movement
+        if (!event.is<sf::Event::KeyPressed>()) return;
+        auto* key = event.getIf<sf::Event::KeyPressed>();
+
+        if (key->scancode == sf::Keyboard::Scancode::Up)
+        {
+            if (cursorRow > 0) cursorRow--;
+            audio.getMenuAudio().arrowNavigationPlay();
+        }
+        else if (key->scancode == sf::Keyboard::Scancode::Down)
+        {
+            if (cursorRow < board.getSize() - 1) cursorRow++;
+            audio.getMenuAudio().arrowNavigationPlay();
+        }
+        else if (key->scancode == sf::Keyboard::Scancode::Left)
+        {
+            if (cursorCol > 0) cursorCol--;
+            audio.getMenuAudio().arrowNavigationPlay();
+        }
+        else if (key->scancode == sf::Keyboard::Scancode::Right)
+        {
+            if (cursorCol < board.getSize() - 1) cursorCol++;
+            audio.getMenuAudio().arrowNavigationPlay();
         }
     }
 }
 
 void Level1Scene::draw(sf::RenderWindow& window, AudioManager& audio)
 {
-    onEnter(window); //  fires once on first draw
+    onEnter(window);
 
     if (!gameStarted)
     {
-        //  show grid size input — game audio not started yet, silence here
         gridSizeInput.draw(window);
     }
     else
     {
-        // game audio already looping from handleEvent
-        //  draw full game scene
-        boardRender.draw(window, board, player, cpu);
+        //  pass cursor position to boardRender
+        boardRender.draw(window, board, player, cpu, cursorRow, cursorCol);
         playerRender.draw(window, player);
         cpuRender.draw(window, cpu);
         window.display();
