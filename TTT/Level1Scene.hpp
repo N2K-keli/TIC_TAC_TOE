@@ -20,6 +20,7 @@ public:
     void handleEvent(const sf::Event& event, AudioManager& audio);
     void draw(sf::RenderWindow& window, AudioManager& audio);
     bool goToGameOver = false;
+    void fullReset(); 
 
     bool hasEntered = false;
     GameManager::Result getResult()     const { return gameManager.getResult(); }

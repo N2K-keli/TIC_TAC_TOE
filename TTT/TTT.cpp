@@ -144,6 +144,7 @@ int main()
             window.clear();
             sceneManagerObject.getGameOverScene().draw(window);
 
+            //  PLAY AGAIN
             if (sceneManagerObject.getGameOverScene().goPlayAgain)
             {
                 sceneManagerObject.getGameOverScene().goPlayAgain = false;
@@ -151,18 +152,21 @@ int main()
                 audioManagerObject.getGameLoseAudio().stop();
                 audioManagerObject.getGameDrawAudio().stop();
 
-                //  reset level 1 fully
-                sceneManagerObject.getLevel1Scene().hasEntered = false;
-                sceneManagerObject.getLevel1Scene().goToGameOver = false;
+                sceneManagerObject.getLevel1Scene().fullReset(); //  replaces the two lines you had
                 stateManagerObject.setcurrentSceneState(SceneState::level1);
                 audioManagerObject.getLevel1Audio().play();
             }
+
+            //  BACK TO MENU
             if (sceneManagerObject.getGameOverScene().goBackToMenu)
             {
                 sceneManagerObject.getGameOverScene().goBackToMenu = false;
                 audioManagerObject.getGameWinAudio().stop();
                 audioManagerObject.getGameLoseAudio().stop();
                 audioManagerObject.getGameDrawAudio().stop();
+
+                sceneManagerObject.getLevel1Scene().fullReset(); //  replaces the two lines you had
+                audioManagerObject.getMenuAudio().play();        //  resume menu music
                 stateManagerObject.setcurrentSceneState(SceneState::menu);
             }
         }

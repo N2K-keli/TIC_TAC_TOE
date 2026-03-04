@@ -161,3 +161,16 @@ void Level1Scene::draw(sf::RenderWindow& window, AudioManager& audio)
         window.display();
     }
 }
+void Level1Scene::fullReset()
+{
+    board.reset();          //  clear board cells
+    gameManager.fullReset(); //  clear scores and rounds
+    gridSizeInput.reset();  // reset grid size selection
+    gameStarted = false;
+    roundOverActive = false;
+    goToGameOver = false;
+    hasEntered = false;
+    cursorRow = 0;
+    cursorCol = 0;
+    std::cout << "Level1Scene fully reset\n";
+}
