@@ -157,6 +157,7 @@
     <ClCompile Include="Level4GameAudio.cpp" />
     <ClCompile Include="Level4Scene.cpp" />
     <ClCompile Include="Level4Scene.hpp" />
+    <ClCompile Include="Level4Strategy.cpp" />
     <ClCompile Include="Level5Audio.cpp" />
     <ClCompile Include="Level5GameAudio.cpp" />
     <ClCompile Include="Level5GameAudio.hpp" />
@@ -209,6 +210,7 @@
     <ClInclude Include="Level3Strategy.hpp" />
     <ClInclude Include="Level4Audio.hpp" />
     <ClInclude Include="Level4GameAudio.hpp" />
+    <ClInclude Include="Level4Strategy.hpp" />
     <ClInclude Include="Level5Audio.hpp" />
     <ClInclude Include="Level6Audio.hpp" />
     <ClInclude Include="Level6Scene.hpp" />
