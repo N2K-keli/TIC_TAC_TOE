@@ -45,5 +45,6 @@ private:
 	Level6Scene  level6Scene;
 	sf::RenderWindow& window;
 	GameOverScene gameOverScene;
+
 	
 };

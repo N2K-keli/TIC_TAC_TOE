@@ -10,6 +10,11 @@ public:
     void onEnter();
 
     bool hasEntered = false;
+    void fullReset()
+    {
+        hasEntered = false;
+        std::cout << "LevelXScene fully reset\n";
+    }
 
 private:
     TextHelper levelText{ "LEVEL 6", {300.f, 250.f}, 80 };

@@ -28,3 +28,5 @@ SceneState StateManager::getcurrentSceneState()
 {
 	return this->currentSceneState; 
 }
+void StateManager::setReturnLevel(SceneState state) { returnLevel = state; }
+SceneState StateManager::getReturnLevel() const { return returnLevel; }

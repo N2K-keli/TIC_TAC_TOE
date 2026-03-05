@@ -24,6 +24,7 @@ class StateManager
 
 	private:
 		SceneState currentSceneState; 
+		SceneState returnLevel = SceneState::level1;
 		
 
 
@@ -31,6 +32,8 @@ class StateManager
 		StateManager(); 
 		void setcurrentSceneState(SceneState state);
 		SceneState getcurrentSceneState();
+		void setReturnLevel(SceneState state);
+		SceneState getReturnLevel() const;
 		
 	
 };

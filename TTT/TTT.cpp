@@ -43,24 +43,21 @@ int main()
             }
 
             if (stateManagerObject.getcurrentSceneState() == SceneState::menu)
-            {
                 sceneManagerObject.getMenuScene().updateMenuIndex(*event, audioManagerObject);
-            }
+
             if (stateManagerObject.getcurrentSceneState() == SceneState::options)
-            {
                 sceneManagerObject.getOptionsScene().updateOptionIndex(*event, audioManagerObject);
-            }
+
             if (stateManagerObject.getcurrentSceneState() == SceneState::level1)
-            {
                 if (audioManagerObject.getLevel1Audio().isFinished())
-                {
                     sceneManagerObject.getLevel1Scene().handleEvent(*event, audioManagerObject);
-                }
-            }
+
+            if (stateManagerObject.getcurrentSceneState() == SceneState::level2) 
+                if (audioManagerObject.getLevel2Audio().isFinished())
+                    sceneManagerObject.getLevel2Scene().handleEvent(*event, audioManagerObject);
+
             if (stateManagerObject.getcurrentSceneState() == SceneState::gameOver)
-            {
                 sceneManagerObject.getGameOverScene().handleEvent(*event, audioManagerObject);
-            }
         }
 
         // ---- INTRO ----
@@ -113,7 +110,7 @@ int main()
             }
         }
 
-        // ---- LEVEL 1 ----  replaced
+        // ---- LEVEL 1 ----
         if (stateManagerObject.getcurrentSceneState() == SceneState::level1)
         {
             if (audioManagerObject.getLevel1Audio().isFinished())
@@ -125,7 +122,7 @@ int main()
                 {
                     sceneManagerObject.getLevel1Scene().goToGameOver = false;
                     audioManagerObject.getLevel1GameAudio().stop();
-
+                    stateManagerObject.setReturnLevel(SceneState::level1); 
                     sceneManagerObject.getGameOverScene().init(window);
                     sceneManagerObject.getGameOverScene().setup(
                         sceneManagerObject.getLevel1Scene().getResult(),
@@ -138,46 +135,28 @@ int main()
             }
         }
 
-        // ---- GAME OVER ----  new
-        if (stateManagerObject.getcurrentSceneState() == SceneState::gameOver)
-        {
-            window.clear();
-            sceneManagerObject.getGameOverScene().draw(window);
-
-            //  PLAY AGAIN
-            if (sceneManagerObject.getGameOverScene().goPlayAgain)
-            {
-                sceneManagerObject.getGameOverScene().goPlayAgain = false;
-                audioManagerObject.getGameWinAudio().stop();
-                audioManagerObject.getGameLoseAudio().stop();
-                audioManagerObject.getGameDrawAudio().stop();
-
-                sceneManagerObject.getLevel1Scene().fullReset(); //  replaces the two lines you had
-                stateManagerObject.setcurrentSceneState(SceneState::level1);
-                audioManagerObject.getLevel1Audio().play();
-            }
-
-            //  BACK TO MENU
-            if (sceneManagerObject.getGameOverScene().goBackToMenu)
-            {
-                sceneManagerObject.getGameOverScene().goBackToMenu = false;
-                audioManagerObject.getGameWinAudio().stop();
-                audioManagerObject.getGameLoseAudio().stop();
-                audioManagerObject.getGameDrawAudio().stop();
-
-                sceneManagerObject.getLevel1Scene().fullReset(); //  replaces the two lines you had
-                audioManagerObject.getMenuAudio().play();        //  resume menu music
-                stateManagerObject.setcurrentSceneState(SceneState::menu);
-            }
-        }
-
         // ---- LEVEL 2 ----
         if (stateManagerObject.getcurrentSceneState() == SceneState::level2)
         {
             if (audioManagerObject.getLevel2Audio().isFinished())
             {
                 window.clear();
-                sceneManagerObject.getLevel2Scene().draw(window);
+                sceneManagerObject.getLevel2Scene().draw(window, audioManagerObject);
+
+                if (sceneManagerObject.getLevel2Scene().goToGameOver)
+                {
+                    sceneManagerObject.getLevel2Scene().goToGameOver = false;
+                    audioManagerObject.getLevel2GameAudio().stop();
+                    stateManagerObject.setReturnLevel(SceneState::level2); // 
+                    sceneManagerObject.getGameOverScene().init(window);
+                    sceneManagerObject.getGameOverScene().setup(
+                        sceneManagerObject.getLevel2Scene().getResult(),
+                        sceneManagerObject.getLevel2Scene().getPlayerScore(),
+                        sceneManagerObject.getLevel2Scene().getCPUScore(),
+                        audioManagerObject
+                    );
+                    stateManagerObject.setcurrentSceneState(SceneState::gameOver);
+                }
             }
         }
 
@@ -218,6 +197,51 @@ int main()
             {
                 window.clear();
                 sceneManagerObject.getLevel6Scene().draw(window);
+            }
+        }
+
+        // ---- GAME OVER ----
+        if (stateManagerObject.getcurrentSceneState() == SceneState::gameOver)
+        {
+            window.clear();
+            sceneManagerObject.getGameOverScene().draw(window);
+
+            if (sceneManagerObject.getGameOverScene().goPlayAgain)
+            {
+                sceneManagerObject.getGameOverScene().goPlayAgain = false;
+                audioManagerObject.getGameWinAudio().stop();
+                audioManagerObject.getGameLoseAudio().stop();
+                audioManagerObject.getGameDrawAudio().stop();
+
+                SceneState lvl = stateManagerObject.getReturnLevel(); // 
+
+                if (lvl == SceneState::level1) { sceneManagerObject.getLevel1Scene().fullReset(); audioManagerObject.getLevel1Audio().play(); }
+                else if (lvl == SceneState::level2) { sceneManagerObject.getLevel2Scene().fullReset(); audioManagerObject.getLevel2Audio().play(); }
+                else if (lvl == SceneState::level3) { sceneManagerObject.getLevel3Scene().fullReset(); audioManagerObject.getLevel3Audio().play(); }
+                else if (lvl == SceneState::level4) { sceneManagerObject.getLevel4Scene().fullReset(); audioManagerObject.getLevel4Audio().play(); }
+                else if (lvl == SceneState::level5) { sceneManagerObject.getLevel5Scene().fullReset(); audioManagerObject.getLevel5Audio().play(); }
+                else if (lvl == SceneState::level6) { sceneManagerObject.getLevel6Scene().fullReset(); audioManagerObject.getLevel6Audio().play(); }
+
+                stateManagerObject.setcurrentSceneState(lvl); //  go back to correct level
+            }
+
+            if (sceneManagerObject.getGameOverScene().goBackToMenu)
+            {
+                sceneManagerObject.getGameOverScene().goBackToMenu = false;
+                audioManagerObject.getGameWinAudio().stop();
+                audioManagerObject.getGameLoseAudio().stop();
+                audioManagerObject.getGameDrawAudio().stop();
+
+                //  reset ALL levels
+                sceneManagerObject.getLevel1Scene().fullReset();
+                sceneManagerObject.getLevel2Scene().fullReset();
+                sceneManagerObject.getLevel3Scene().fullReset();
+                sceneManagerObject.getLevel4Scene().fullReset();
+                sceneManagerObject.getLevel5Scene().fullReset();
+                sceneManagerObject.getLevel6Scene().fullReset();
+
+                audioManagerObject.getMenuAudio().play();
+                stateManagerObject.setcurrentSceneState(SceneState::menu);
             }
         }
     }
