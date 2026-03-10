@@ -72,12 +72,6 @@
     <ClCompile Include="Level3Audio.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Level4Scene.hpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level5Scene.hpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
     <ClCompile Include="Level1Scene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -98,12 +92,6 @@
     </ClCompile>
     <ClCompile Include="GridSizeInput.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level5GameAudio.hpp">
-      <Filter>Header Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Level6GameAudio.hpp">
-      <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="Level1GameAudio.cpp">
       <Filter>Source Files</Filter>
@@ -169,6 +157,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Level4Strategy.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Level5Strategy.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -300,6 +291,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Level4Strategy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level5Strategy.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level4Scene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level6GameAudio.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level5Scene.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Level5GameAudio.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
