@@ -67,7 +67,11 @@ void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
 
         if (!event.is<sf::Event::KeyPressed>()) return;
         auto* key = event.getIf<sf::Event::KeyPressed>();
-
+        if (key->scancode == sf::Keyboard::Scancode::Q || key->scancode == sf::Keyboard::Scancode::Escape )
+        {
+            goToMenu = true;
+            return;
+        }
         if (!gameManager.isGameOver())
         {
             if (key->scancode == sf::Keyboard::Scancode::Up)

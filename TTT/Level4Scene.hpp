@@ -23,6 +23,7 @@ public:
 
     bool hasEntered = false;
     bool goToGameOver = false;
+    bool goToMenu = false; 
 
     GameManager::Result getResult()      const { return gameManager.getResult(); }
     int                 getPlayerScore() const { return gameManager.getPlayerScore(); }

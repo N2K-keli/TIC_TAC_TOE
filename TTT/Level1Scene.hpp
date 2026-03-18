@@ -21,6 +21,7 @@ public:
     void draw(sf::RenderWindow& window, AudioManager& audio);
     bool goToGameOver = false;
     void fullReset(); 
+    bool goToMenu = false; 
 
     bool hasEntered = false;
     GameManager::Result getResult()     const { return gameManager.getResult(); }

@@ -134,6 +134,17 @@ int main()
                 window.clear();
                 sceneManagerObject.getLevel1Scene().draw(window, audioManagerObject);
 
+                
+
+                if (sceneManagerObject.getLevel1Scene().goToMenu)
+                {
+                    sceneManagerObject.getLevel1Scene().goToMenu = false;
+                    sceneManagerObject.getLevel1Scene().fullReset();
+                    audioManagerObject.getLevel1GameAudio().stop();
+                    audioManagerObject.getMenuAudio().play();
+                    stateManagerObject.setcurrentSceneState(SceneState::menu);
+                }
+
                 if (sceneManagerObject.getLevel1Scene().goToGameOver)
                 {
                     sceneManagerObject.getLevel1Scene().goToGameOver = false;
@@ -158,6 +169,15 @@ int main()
             {
                 window.clear();
                 sceneManagerObject.getLevel2Scene().draw(window, audioManagerObject);
+
+                if (sceneManagerObject.getLevel2Scene().goToMenu)
+                {
+                    sceneManagerObject.getLevel2Scene().goToMenu = false;
+                    sceneManagerObject.getLevel2Scene().fullReset();
+                    audioManagerObject.getLevel2GameAudio().stop();
+                    audioManagerObject.getMenuAudio().play();
+                    stateManagerObject.setcurrentSceneState(SceneState::menu);
+                }
 
                 if (sceneManagerObject.getLevel2Scene().goToGameOver)
                 {
@@ -184,6 +204,15 @@ int main()
                 window.clear();
                 sceneManagerObject.getLevel3Scene().draw(window, audioManagerObject);
 
+                if (sceneManagerObject.getLevel3Scene().goToMenu)
+                {
+                    sceneManagerObject.getLevel3Scene().goToMenu = false;
+                    sceneManagerObject.getLevel3Scene().fullReset();
+                    audioManagerObject.getLevel3GameAudio().stop();
+                    audioManagerObject.getMenuAudio().play();
+                    stateManagerObject.setcurrentSceneState(SceneState::menu);
+                }
+
                 if (sceneManagerObject.getLevel3Scene().goToGameOver)
                 {
                     sceneManagerObject.getLevel3Scene().goToGameOver = false;
@@ -208,6 +237,15 @@ int main()
             {
                 window.clear();
                 sceneManagerObject.getLevel4Scene().draw(window, audioManagerObject);
+
+                if (sceneManagerObject.getLevel4Scene().goToMenu)
+                {
+                    sceneManagerObject.getLevel4Scene().goToMenu = false;
+                    sceneManagerObject.getLevel4Scene().fullReset();
+                    audioManagerObject.getLevel4GameAudio().stop();
+                    audioManagerObject.getMenuAudio().play();
+                    stateManagerObject.setcurrentSceneState(SceneState::menu);
+                }
 
                 if (sceneManagerObject.getLevel4Scene().goToGameOver)
                 {
@@ -234,6 +272,15 @@ int main()
                 window.clear();
                 sceneManagerObject.getLevel5Scene().draw(window, audioManagerObject);
 
+                if (sceneManagerObject.getLevel5Scene().goToMenu)
+                {
+                    sceneManagerObject.getLevel5Scene().goToMenu = false;
+                    sceneManagerObject.getLevel5Scene().fullReset();
+                    audioManagerObject.getLevel5GameAudio().stop();
+                    audioManagerObject.getMenuAudio().play();
+                    stateManagerObject.setcurrentSceneState(SceneState::menu);
+                }
+
                 if (sceneManagerObject.getLevel5Scene().goToGameOver)
                 {
                     sceneManagerObject.getLevel5Scene().goToGameOver = false;
@@ -256,7 +303,16 @@ int main()
             if (audioManagerObject.getLevel6Audio().isFinished())
             {
                 window.clear();
-                sceneManagerObject.getLevel6Scene().draw(window, audioManagerObject); // ✅
+                sceneManagerObject.getLevel6Scene().draw(window, audioManagerObject);
+                
+                if (sceneManagerObject.getLevel6Scene().goToMenu)
+                {
+                    sceneManagerObject.getLevel6Scene().goToMenu = false;
+                    sceneManagerObject.getLevel6Scene().fullReset();
+                    audioManagerObject.getLevel6GameAudio().stop();
+                    audioManagerObject.getMenuAudio().play();
+                    stateManagerObject.setcurrentSceneState(SceneState::menu);
+                }
 
                 if (sceneManagerObject.getLevel6Scene().goToGameOver)
                 {
