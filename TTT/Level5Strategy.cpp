@@ -7,8 +7,9 @@ std::pair<int, int> Level5Strategy::makeMove(Board& board, CellState me, CellSta
     int bestScore = std::numeric_limits<int>::min();
     std::pair<int, int> bestMove = { -1, -1 };
 
-    //  if board is empty place near center
     int size = board.getSize();
+
+    // if board is empty place at center immediately
     bool boardEmpty = true;
     for (int r = 0; r < size && boardEmpty; r++)
         for (int c = 0; c < size && boardEmpty; c++)
@@ -18,7 +19,8 @@ std::pair<int, int> Level5Strategy::makeMove(Board& board, CellState me, CellSta
     if (boardEmpty)
         return { size / 2, size / 2 };
 
-    auto moves = orderMoves(board, me);
+    //  use getCandidateMoves — only cells near existing pieces
+    auto moves = getCandidateMoves(board, me);
 
     for (const auto& move : moves)
     {
@@ -37,7 +39,6 @@ std::pair<int, int> Level5Strategy::makeMove(Board& board, CellState me, CellSta
 
     return bestMove;
 }
-
 int Level5Strategy::minimax(Board& board, int depth, bool isMaximizing,
     CellState me, CellState opponent, int alpha, int beta)
 {
@@ -48,14 +49,17 @@ int Level5Strategy::minimax(Board& board, int depth, bool isMaximizing,
 
     int size = board.getSize();
 
-    // much lower depth limits — fast enough while still strong
-    int maxDepth = (size <= 3) ? 8 : (size == 4) ? 5 : 4;
+    //  much stricter depth limits based on board size
+    int maxDepth = (size <= 3) ? 8 : (size == 4) ? 5 : (size == 5) ? 4 : 2;
 
     if (depth >= maxDepth)
         return evaluateBoard(board, me, opponent);
 
-    //  only consider moves near existing pieces — drastically reduces branching
     auto moves = getCandidateMoves(board, isMaximizing ? me : opponent);
+
+    //  cap moves considered — never evaluate more than 15 candidates
+    if ((int)moves.size() > 15)
+        moves.resize(15);
 
     if (isMaximizing)
     {
@@ -89,14 +93,8 @@ int Level5Strategy::minimax(Board& board, int depth, bool isMaximizing,
 
 int Level5Strategy::evaluateBoard(Board& board, CellState me, CellState opponent)
 {
-    int myScore = evaluatePosition(board, me);
-    int opponentScore = evaluatePosition(board, opponent);
-
-    // Add fork detection bonus
-    int myForks = detectForks(board, me);
-    int opponentForks = detectForks(board, opponent);
-
-    return myScore - opponentScore + (myForks - opponentForks) * 500;
+    
+    return evaluatePosition(board, me) - evaluatePosition(board, opponent);
 }
 
 int Level5Strategy::evaluatePosition(Board& board, CellState state)
@@ -416,7 +414,7 @@ bool Level5Strategy::isBoardFull(Board& board)
 std::vector<std::pair<int, int>> Level5Strategy::getCandidateMoves(Board& board, CellState currentPlayer)
 {
     int size = board.getSize();
-    int radius = 2; // only look 2 cells away from existing pieces
+    int radius = (size <= 5) ? 2 : 1; //  smaller radius for large boards
 
     std::vector<std::pair<std::pair<int, int>, int>> movesWithScores;
 
@@ -426,7 +424,6 @@ std::vector<std::pair<int, int>> Level5Strategy::getCandidateMoves(Board& board,
         {
             if (board.getCell(row, col) != CellState::empty) continue;
 
-            // check if any neighbour within radius is occupied
             bool hasNeighbour = false;
             for (int dr = -radius; dr <= radius && !hasNeighbour; dr++)
                 for (int dc = -radius; dc <= radius && !hasNeighbour; dc++)
@@ -447,7 +444,6 @@ std::vector<std::pair<int, int>> Level5Strategy::getCandidateMoves(Board& board,
         }
     }
 
-    //  sort best moves first for better pruning
     std::sort(movesWithScores.begin(), movesWithScores.end(),
         [](const auto& a, const auto& b) { return a.second > b.second; });
 
