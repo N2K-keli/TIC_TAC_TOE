@@ -1,18 +1,174 @@
 #include "Level6Scene.hpp"
 
-void Level6Scene::onEnter()
+void Level6Scene::onEnter(sf::RenderWindow& win)
 {
     if (!hasEntered)
     {
-        std::cout << "Welcome to Level 6!\n";
+        window = &win;
+
+        player.init(
+            "assets/images/level1_player_symbol.png", 
+            "assets/images/level1_player_picture.png", 
+            "PLAYER"
+        );
+        cpu.init(
+            "assets/images/level6_cpu_symbol.png", 
+            "assets/images/level6_cpu_picture.png", 
+            "CPU"
+        );
+
+        cpu.setStrategy(new Level6Strategy()); 
+
+        playerRender.init(win);
+        cpuRender.init(win);
+        gridSizeInput.init(win);
+        roundOverScreen.init(win);
+        gridSizeInput.reset();
+
         hasEntered = true;
+        gameStarted = false;
     }
 }
 
-void Level6Scene::draw(sf::RenderWindow& window)
+void Level6Scene::handleEvent(const sf::Event& event, AudioManager& audio)
 {
-    onEnter();
-    levelText.getText().setFillColor(sf::Color::White);
-    levelText.draw(window);
-    window.display();
+    if (event.is<sf::Event::Resized>())
+    {
+        gridSizeInput.init(*window);
+        roundOverScreen.init(*window);
+        if (gameStarted)
+        {
+            boardRender.init(board.getSize(), *window, "assets/images/game_background2.jpg");
+            playerRender.init(*window);
+            cpuRender.init(*window);
+        }
+        return;
+    }
+
+    if (!gameStarted)
+    {
+        gridSizeInput.handleEvent(event, audio);
+        if (gridSizeInput.isConfirmed())
+        {
+            int size = gridSizeInput.getGridSize();
+            board.init(size);
+            boardRender.init(size, *window, "assets/images/game_background2.jpg");
+            gameManager.init(size);
+            audio.getLevel6GameAudio().play(); 
+            gameStarted = true;
+            cursorRow = 0;
+            cursorCol = 0;
+            std::cout << "Level 6 started with grid size: " << size << "\n";
+        }
+    }
+    else
+    {
+        if (roundOverActive) return;
+
+        if (!event.is<sf::Event::KeyPressed>()) return;
+        auto* key = event.getIf<sf::Event::KeyPressed>();
+
+        if (!gameManager.isGameOver())
+        {
+            if (key->scancode == sf::Keyboard::Scancode::Up)
+            {
+                if (cursorRow > 0) cursorRow--;
+                audio.getMenuAudio().arrowNavigationPlay();
+            }
+            else if (key->scancode == sf::Keyboard::Scancode::Down)
+            {
+                if (cursorRow < board.getSize() - 1) cursorRow++;
+                audio.getMenuAudio().arrowNavigationPlay();
+            }
+            else if (key->scancode == sf::Keyboard::Scancode::Left)
+            {
+                if (cursorCol > 0) cursorCol--;
+                audio.getMenuAudio().arrowNavigationPlay();
+            }
+            else if (key->scancode == sf::Keyboard::Scancode::Right)
+            {
+                if (cursorCol < board.getSize() - 1) cursorCol++;
+                audio.getMenuAudio().arrowNavigationPlay();
+            }
+            else if (key->scancode == sf::Keyboard::Scancode::Enter)
+            {
+                bool valid = gameManager.handlePlayerMove(cursorRow, cursorCol, board);
+
+                if (valid && !gameManager.isGameOver())
+                {
+                    gameManager.handleCPUMove(board, cpu);
+                }
+
+                if (gameManager.isGameOver())
+                {
+                    std::string winnerMsg;
+                    if (gameManager.getResult() == GameManager::Result::playerWin)
+                        winnerMsg = "PLAYER WINS!";
+                    else if (gameManager.getResult() == GameManager::Result::cpuWin)
+                        winnerMsg = "CPU WINS!";
+                    else
+                        winnerMsg = "DRAW!";
+
+                    roundOverScreen.show(gameManager.getRoundNumber() - 1, winnerMsg);
+                    roundOverActive = true;
+                }
+            }
+        }
+    }
+}
+
+void Level6Scene::draw(sf::RenderWindow& window, AudioManager& audio)
+{
+    onEnter(window);
+
+    if (!gameStarted)
+    {
+        gridSizeInput.draw(window);
+    }
+    else
+    {
+        boardRender.draw(window, board, player, cpu, cursorRow, cursorCol);
+        playerRender.draw(window, player);
+        cpuRender.draw(window, cpu);
+
+        if (roundOverActive)
+        {
+            roundOverScreen.update();
+            roundOverScreen.draw(window);
+
+            if (roundOverScreen.isFinished())
+            {
+                roundOverActive = false;
+                roundOverScreen.reset();
+
+                if (!gameManager.isMatchOver())
+                {
+                    board.init(board.getSize());
+                    gameManager.reset();
+                    cursorRow = 0;
+                    cursorCol = 0;
+                }
+                else
+                {
+                    goToGameOver = true;
+                }
+            }
+        }
+
+        window.display();
+    }
+}
+
+void Level6Scene::fullReset()
+{
+    board.reset();
+    gameManager.fullReset();
+    gridSizeInput.reset();
+    gameStarted = false;
+    roundOverActive = false;
+    goToGameOver = false;
+    hasEntered = false;
+    cursorRow = 0;
+    cursorCol = 0;
+    std::cout << "Level6Scene fully reset\n";
 }

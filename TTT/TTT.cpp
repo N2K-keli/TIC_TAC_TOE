@@ -68,6 +68,10 @@ int main()
                 if (audioManagerObject.getLevel5Audio().isFinished())
                     sceneManagerObject.getLevel5Scene().handleEvent(*event, audioManagerObject);
 
+            if (stateManagerObject.getcurrentSceneState() == SceneState::level6)
+                if (audioManagerObject.getLevel6Audio().isFinished())
+                    sceneManagerObject.getLevel6Scene().handleEvent(*event, audioManagerObject);
+
             if (stateManagerObject.getcurrentSceneState() == SceneState::gameOver)
                 sceneManagerObject.getGameOverScene().handleEvent(*event, audioManagerObject);
         }
@@ -252,7 +256,22 @@ int main()
             if (audioManagerObject.getLevel6Audio().isFinished())
             {
                 window.clear();
-                sceneManagerObject.getLevel6Scene().draw(window);
+                sceneManagerObject.getLevel6Scene().draw(window, audioManagerObject); // ✅
+
+                if (sceneManagerObject.getLevel6Scene().goToGameOver)
+                {
+                    sceneManagerObject.getLevel6Scene().goToGameOver = false;
+                    audioManagerObject.getLevel6GameAudio().stop();
+                    stateManagerObject.setReturnLevel(SceneState::level6); // ✅
+                    sceneManagerObject.getGameOverScene().init(window);
+                    sceneManagerObject.getGameOverScene().setup(
+                        sceneManagerObject.getLevel6Scene().getResult(),
+                        sceneManagerObject.getLevel6Scene().getPlayerScore(),
+                        sceneManagerObject.getLevel6Scene().getCPUScore(),
+                        audioManagerObject
+                    );
+                    stateManagerObject.setcurrentSceneState(SceneState::gameOver);
+                }
             }
         }
 
