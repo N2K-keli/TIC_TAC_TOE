@@ -53,6 +53,7 @@ void RoundOverScreen::draw(sf::RenderWindow& window)
 
     float winW = (float)window.getSize().x;
 
+
     // draw dark overlay
     window.draw(overlay);
 

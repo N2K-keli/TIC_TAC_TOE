@@ -30,6 +30,7 @@ public:
     int                 getCPUScore()    const { return gameManager.getCPUScore(); }
 
 private:
+    TextHelper quitHint{ "ESC or Q to quit", {0.f, 0.f}, 22 };
     sf::RenderWindow* window = nullptr;
     int cursorRow = 0;
     int cursorCol = 0;

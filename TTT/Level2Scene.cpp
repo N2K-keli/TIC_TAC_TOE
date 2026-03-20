@@ -1,5 +1,5 @@
 #include "Level2Scene.hpp"
-
+#include "SaveManager.hpp"
 void Level2Scene::onEnter(sf::RenderWindow& win)
 {
     if (!hasEntered)
@@ -103,6 +103,29 @@ void Level2Scene::handleEvent(const sf::Event& event, AudioManager& audio)
                 {
                     gameManager.handleCPUMove(board, cpu);
                 }
+                if (valid)
+                {
+                    SaveData data;
+                    data.level = 1; //  change per level
+                    data.gridSize = board.getSize();
+                    data.playerScore = gameManager.getPlayerScore();
+                    data.cpuScore = gameManager.getCPUScore();
+                    data.roundNumber = gameManager.getRoundNumber();
+                    data.playerTurn = gameManager.getIsPlayerTurn();
+
+                    //  copy board state
+                    data.boardData.resize(board.getSize(), std::vector<int>(board.getSize(), 0));
+                    for (int r = 0; r < board.getSize(); r++)
+                        for (int c = 0; c < board.getSize(); c++)
+                        {
+                            CellState cell = board.getCell(r, c);
+                            data.boardData[r][c] = (cell == CellState::empty) ? 0 :
+                                (cell == CellState::player) ? 1 : 2;
+                        }
+
+                    SaveManager::save(data);
+                }
+
 
                 if (gameManager.isGameOver())
                 {
@@ -135,6 +158,10 @@ void Level2Scene::draw(sf::RenderWindow& window, AudioManager& audio)
         boardRender.draw(window, board, player, cpu, cursorRow, cursorCol);
         playerRender.draw(window, player);
         cpuRender.draw(window, cpu);
+
+        sf::Vector2u size = window.getSize();
+        quitHint.getText().setPosition(sf::Vector2f(10.f, static_cast<float>(size.y) - 35.f));
+        quitHint.draw(window);
 
         if (roundOverActive)
         {

@@ -172,6 +172,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerRender.cpp" />
     <ClCompile Include="RoundOverScreen.cpp" />
+    <ClCompile Include="SaveManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="PlayerRender.hpp" />
     <ClInclude Include="RoundOverScreen.hpp" />
+    <ClInclude Include="SaveManager.hpp" />
     <ClInclude Include="SceneManager.hpp" />
     <ClInclude Include="StateManager.hpp" />
     <ClInclude Include="TextHelper.hpp" />
