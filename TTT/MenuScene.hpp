@@ -10,6 +10,7 @@ class MenuScene
 public:
 	void drawMenu(sf::RenderWindow& window);
     void updateMenuIndex(const sf::Event& event , AudioManager& audio);
+    void resetFlags();
     int selectedIndex = 0;
     bool shouldExit = false;
     bool goToOptions = false;
@@ -20,6 +21,7 @@ public:
     bool goToLevel4 = false;
     bool goToLevel5 = false;
     bool goToLevel6 = false;
+    bool goToContinue = false; 
     
 
 

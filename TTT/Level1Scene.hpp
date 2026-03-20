@@ -10,9 +10,10 @@
 #include "GridSizeInput.hpp"
 #include "AudioManager.hpp"
 #include "Level1Strategy.hpp"
-#include "GameManager.hpp" 
+#include "GameManager.hpp"
 #include "RoundOverScreen.hpp"
-#include "TextHelper.hpp"
+#include "SaveManager.hpp" 
+#include "TextHelper.hpp" 
 
 class Level1Scene
 {
@@ -20,12 +21,14 @@ public:
     void onEnter(sf::RenderWindow& window);
     void handleEvent(const sf::Event& event, AudioManager& audio);
     void draw(sf::RenderWindow& window, AudioManager& audio);
-    bool goToGameOver = false;
-    void fullReset(); 
-    bool goToMenu = false; 
+    void fullReset();
+    void loadSave(const SaveData& data, sf::RenderWindow& win, AudioManager& audio); // ✅
 
+    bool goToGameOver = false;
+    bool goToMenu = false;
     bool hasEntered = false;
-    GameManager::Result getResult()     const { return gameManager.getResult(); }
+
+    GameManager::Result getResult()      const { return gameManager.getResult(); }
     int                 getPlayerScore() const { return gameManager.getPlayerScore(); }
     int                 getCPUScore()    const { return gameManager.getCPUScore(); }
 
@@ -33,23 +36,19 @@ private:
     TextHelper quitHint{ "ESC or Q to quit", {0.f, 0.f}, 22 };
 
     sf::RenderWindow* window = nullptr;
-    
     int cursorRow = 0;
     int cursorCol = 0;
 
-    Board  board;
-    Player player;
-    CPU    cpu;
-
-    BoardRender  boardRender;
-    PlayerRender playerRender;
-    CPURender    cpuRender;
-
-    GridSizeInput gridSizeInput;
-    GameManager   gameManager; 
-
-    RoundOverScreen roundOverScreen; 
-    bool roundOverActive = false;
+    Board           board;
+    Player          player;
+    CPU             cpu;
+    BoardRender     boardRender;
+    PlayerRender    playerRender;
+    CPURender       cpuRender;
+    GridSizeInput   gridSizeInput;
+    GameManager     gameManager;
+    RoundOverScreen roundOverScreen;
 
     bool gameStarted = false;
+    bool roundOverActive = false;
 };

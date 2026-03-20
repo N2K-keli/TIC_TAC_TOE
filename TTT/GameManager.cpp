@@ -197,3 +197,17 @@ int            GameManager::getPlayerScore()  const { return playerScore; }
 int            GameManager::getCPUScore()     const { return cpuScore; }
 int            GameManager::getRoundNumber()  const { return roundNumber; }
 GameManager::Result GameManager::getResult()  const { return currentResult; }
+
+
+void GameManager::loadSave(int pScore, int cScore, int round, bool pTurn)
+{
+    playerScore = pScore;
+    cpuScore = cScore;
+    roundNumber = round;
+    playerTurn = pTurn;
+    gameOver = false;
+    matchOver = false;
+    currentResult = Result::none;
+    std::cout << "GameManager loaded — score: " << pScore << "-" << cScore
+        << " round: " << round << "\n";
+}

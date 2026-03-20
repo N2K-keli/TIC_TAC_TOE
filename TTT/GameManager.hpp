@@ -23,6 +23,7 @@ public:
     int    getCPUScore()      const;
     int    getRoundNumber()   const;
     Result getResult()        const;
+    void loadSave(int pScore, int cScore, int round, bool pTurn);
 
 private:
     bool   playerTurn = true;

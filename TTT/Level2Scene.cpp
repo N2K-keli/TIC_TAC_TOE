@@ -204,3 +204,34 @@ void Level2Scene::fullReset()
     cursorCol = 0;
     std::cout << "Level2Scene fully reset\n";
 }
+
+void Level2Scene::loadSave(const SaveData& data, sf::RenderWindow& win, AudioManager& audio)
+{
+    //  initialize assets if not already done
+    onEnter(win);
+
+    //  initialize board and renderer with saved grid size
+    board.init(data.gridSize);
+    boardRender.init(data.gridSize, win, "assets/images/game_background2.jpg");
+
+    //  restore board state
+    for (int r = 0; r < data.gridSize; r++)
+        for (int c = 0; c < data.gridSize; c++)
+        {
+            CellState cell = (data.boardData[r][c] == 0) ? CellState::empty :
+                (data.boardData[r][c] == 1) ? CellState::player : CellState::cpu;
+            board.setCell(r, c, cell);
+        }
+
+    //  restore game manager state
+    gameManager.init(data.gridSize);
+    gameManager.loadSave(data.playerScore, data.cpuScore, data.roundNumber, data.playerTurn);
+
+    //  start game audio
+    audio.getLevel2GameAudio().play();
+    gameStarted = true;
+    cursorRow = 0;
+    cursorCol = 0;
+
+    std::cout << "Level2Scene save loaded\n";
+}

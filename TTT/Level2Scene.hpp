@@ -9,9 +9,11 @@
 #include "CPURender.hpp"
 #include "GridSizeInput.hpp"
 #include "AudioManager.hpp"
-#include "Level2Strategy.hpp" //  only change in hpp
+#include "Level2Strategy.hpp" 
 #include "GameManager.hpp"
 #include "RoundOverScreen.hpp"
+#include "SaveManager.hpp" 
+#include "TextHelper.hpp" 
 
 class Level2Scene
 {
@@ -20,6 +22,7 @@ public:
     void handleEvent(const sf::Event& event, AudioManager& audio);
     void draw(sf::RenderWindow& window, AudioManager& audio);
     void fullReset();
+    void loadSave(const SaveData& data, sf::RenderWindow& win, AudioManager& audio);
 
     bool hasEntered = false;
     bool goToGameOver = false;

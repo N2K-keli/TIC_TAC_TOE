@@ -148,8 +148,13 @@ void MenuScene::updateMenuIndex(const sf::Event& event, AudioManager& audio)
             if (selectedIndex == 0) // NEW GAME
             {
                 audio.getMenuAudio().arrowEnterPlay();
-                showLevelSelect = true; //
+                showLevelSelect = true;
                 levelSelectIndex = 0;
+            }
+            else if (selectedIndex == 1) // CONTINUE 
+            {
+                audio.getMenuAudio().arrowEnterPlay();
+                goToContinue = true;
             }
             else if (selectedIndex == 2) // OPTIONS
             {
@@ -164,4 +169,18 @@ void MenuScene::updateMenuIndex(const sf::Event& event, AudioManager& audio)
             }
         }
     }
+}
+void MenuScene::resetFlags()
+{
+    goToContinue = false;
+    goToOptions = false;
+    goToLevel1 = false;
+    goToLevel2 = false;
+    goToLevel3 = false;
+    goToLevel4 = false;
+    goToLevel5 = false;
+    goToLevel6 = false;
+    showLevelSelect = false;
+    showExitConfirm = false;
+    selectedIndex = 0;
 }

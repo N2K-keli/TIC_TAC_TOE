@@ -1,5 +1,6 @@
 #include "SaveManager.hpp"
 #include <sstream>
+#include <filesystem> // 
 
 const std::string SaveManager::SAVE_FILE = "save/savegame.txt";
 
@@ -11,6 +12,9 @@ bool SaveManager::saveExists()
 
 void SaveManager::save(const SaveData& data)
 {
+    // 
+    std::filesystem::create_directories("save");
+
     std::ofstream file(SAVE_FILE);
     if (!file.is_open())
     {
@@ -24,7 +28,7 @@ void SaveManager::save(const SaveData& data)
     file << "cpuScore=" << data.cpuScore << "\n";
     file << "roundNumber=" << data.roundNumber << "\n";
     file << "playerTurn=" << (data.playerTurn ? 1 : 0) << "\n";
-    file << "board=\n";
+    file << "board=" << "\n";
 
     for (const auto& row : data.boardData)
     {
@@ -36,6 +40,7 @@ void SaveManager::save(const SaveData& data)
         file << "\n";
     }
 
+    file.close(); // 
     std::cout << "Game saved successfully\n";
 }
 
@@ -61,7 +66,7 @@ SaveData SaveManager::load()
         else if (line.find("cpuScore=") == 0) data.cpuScore = std::stoi(line.substr(9));
         else if (line.find("roundNumber=") == 0) data.roundNumber = std::stoi(line.substr(12));
         else if (line.find("playerTurn=") == 0) data.playerTurn = std::stoi(line.substr(11)) == 1;
-        else if (line == "board=") readingBoard = true;
+        else if (line == "board=")               readingBoard = true;
         else if (readingBoard && !line.empty())
         {
             std::vector<int> row;
@@ -73,7 +78,10 @@ SaveData SaveManager::load()
         }
     }
 
-    std::cout << "Game loaded successfully\n";
+    file.close(); 
+    std::cout << "Game loaded — level: " << data.level
+        << " gridSize: " << data.gridSize
+        << " round: " << data.roundNumber << "\n";
     return data;
 }
 
@@ -90,6 +98,6 @@ void SaveManager::resetSave(int level, int gridSize)
     //  fill board with zeros
     data.boardData.assign(gridSize, std::vector<int>(gridSize, 0));
 
-    save(data);
-    std::cout << "Save reset for level " << level << " gridSize " << gridSize << "\n";
+    save(data); //  calls save which creates folder automatically
+    std::cout << "Save reset — level: " << level << " gridSize: " << gridSize << "\n";
 }
