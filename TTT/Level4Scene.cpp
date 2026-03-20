@@ -69,6 +69,8 @@ void Level4Scene::handleEvent(const sf::Event& event, AudioManager& audio)
         auto* key = event.getIf<sf::Event::KeyPressed>();
         if (key->scancode == sf::Keyboard::Scancode::Q || key->scancode == sf::Keyboard::Scancode::Escape)
         {
+            goToMenu = true;
+            return;
       
             return;
         }
