@@ -70,6 +70,25 @@ void Level1Scene::handleEvent(const sf::Event& event, AudioManager& audio)
         auto* key = event.getIf<sf::Event::KeyPressed>();
         if (key->scancode == sf::Keyboard::Scancode::Q || key->scancode == sf::Keyboard::Scancode::Escape )
         {
+            SaveData data;
+            data.level = 1; 
+            data.gridSize = board.getSize();
+            data.playerScore = gameManager.getPlayerScore();
+            data.cpuScore = gameManager.getCPUScore();
+            data.roundNumber = gameManager.getRoundNumber();
+            data.playerTurn = gameManager.getIsPlayerTurn();
+            
+
+            data.boardData.resize(board.getSize(), std::vector<int>(board.getSize(), 0));
+            for (int r = 0; r < board.getSize(); r++)
+                for (int c = 0; c < board.getSize(); c++)
+                {
+                    CellState cell = board.getCell(r, c);
+                    data.boardData[r][c] = (cell == CellState::empty) ? 0 :
+                        (cell == CellState::player) ? 1 : 2;
+                }
+
+            SaveManager::save(data);
             goToMenu = true;
             return;
         }

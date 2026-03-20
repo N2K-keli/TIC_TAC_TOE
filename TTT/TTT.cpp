@@ -139,7 +139,7 @@ int main()
                         audioManagerObject.getLevel2Audio().stop();
                         stateManagerObject.setcurrentSceneState(SceneState::level2);
                     }
-                    /*
+                    
                     else if (data.level == 3)
                     {
                         sceneManagerObject.getLevel3Scene().fullReset();
@@ -168,7 +168,7 @@ int main()
                         audioManagerObject.getLevel6Audio().stop();
                         stateManagerObject.setcurrentSceneState(SceneState::level6);
                     }
-                    */
+                    
                 }
             }
         }

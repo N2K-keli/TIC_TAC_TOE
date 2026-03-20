@@ -69,6 +69,7 @@ void Level2Scene::handleEvent(const sf::Event& event, AudioManager& audio)
         auto* key = event.getIf<sf::Event::KeyPressed>();
         if (key->scancode == sf::Keyboard::Scancode::Q || key->scancode == sf::Keyboard::Scancode::Escape)
         {
+
             goToMenu = true;
             return;
         }
@@ -106,7 +107,7 @@ void Level2Scene::handleEvent(const sf::Event& event, AudioManager& audio)
                 if (valid)
                 {
                     SaveData data;
-                    data.level = 1; //  change per level
+                    data.level = 2; 
                     data.gridSize = board.getSize();
                     data.playerScore = gameManager.getPlayerScore();
                     data.cpuScore = gameManager.getCPUScore();

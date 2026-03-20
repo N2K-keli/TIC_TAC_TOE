@@ -12,11 +12,14 @@
 #include "Level5Strategy.hpp"
 #include "GameManager.hpp"
 #include "RoundOverScreen.hpp"
+#include "SaveManager.hpp" 
+#include "TextHelper.hpp" 
 
 class Level5Scene
 {
 public:
     void onEnter(sf::RenderWindow& window);
+    void loadSave(const SaveData& data, sf::RenderWindow& win, AudioManager& audio);
     void handleEvent(const sf::Event& event, AudioManager& audio);
     void draw(sf::RenderWindow& window, AudioManager& audio);
     void fullReset();
