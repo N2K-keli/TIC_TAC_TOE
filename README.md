@@ -24,6 +24,19 @@ A feature-rich TicTacToe game built in **C++ with SFML**, developed as part of t
 ### Gameplay — Level 2 (5x5 grid)
 ![Gameplay Level 2](screenshots/gameplay_level2.png)
 
+### Gameplay — Level 3 (6x6 grid)
+![Gameplay Level 3](screenshots/gameplay_level3.png)
+
+### Gameplay — Level 4 (7x7 grid)
+![Gameplay Level 4](screenshots/gameplay_level4.png)
+
+### Gameplay — Level 5 (11x11 grid)
+![Gameplay Level 5](screenshots/gameplay_level5.png)
+
+### Gameplay — Level 6 (7x7 grid)
+![Gameplay Level 6](screenshots/gameplay_level6.png)
+
+
 ---
 
 ## Features
@@ -36,6 +49,7 @@ A feature-rich TicTacToe game built in **C++ with SFML**, developed as part of t
 - **Background music and SFX** — unique audio per level
 - **Proportional scaling** — UI adapts to any window size including fullscreen
 - **Golden cursor** — navigate the board with arrow keys, place with Enter
+- **Save & Continue** — quit anytime and resume your game from the main menu
 
 ---
 
@@ -45,10 +59,10 @@ A feature-rich TicTacToe game built in **C++ with SFML**, developed as part of t
 |-------|-------------|-----------|------------|
 | 1 | Toad | Random Move | ⭐ |
 | 2 | King Bugs Bunny | Greedy / One-Move Lookahead | ⭐⭐ |
-| 3 | TBA | Rule-Based Heuristic | ⭐⭐⭐ |
-| 4 | TBA | Minimax with Limited Depth | ⭐⭐⭐⭐ |
-| 5 | TBA | Full Minimax + Alpha-Beta Pruning | ⭐⭐⭐⭐⭐ |
-| 6 | TBA | Monte Carlo Tree Search (MCTS) | ⭐⭐⭐⭐⭐⭐ |
+| 3 | Special Grade Hakari | Rule-Based Heuristic | ⭐⭐⭐ |
+| 4 | Kenshiro | Minimax with Limited Depth | ⭐⭐⭐⭐ |
+| 5 | Vampire Dio Brando | Full Minimax + Alpha-Beta Pruning | ⭐⭐⭐⭐⭐ |
+| 6 | Celestial Dragon Doflamingo | Monte Carlo Tree Search (MCTS) | ⭐⭐⭐⭐⭐⭐ |
 
 ---
 
@@ -61,6 +75,8 @@ A feature-rich TicTacToe game built in **C++ with SFML**, developed as part of t
 5. Use **arrow keys** to move the cursor around the board
 6. Press **Enter** to place your symbol
 7. First to win **2 rounds** wins the match
+8. Press **Q or ESC** at any time to quit and save your progress
+9. Select **CONTINUE** from the main menu to resume your last game
 
 ---
 
