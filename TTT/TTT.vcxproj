@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="Arrow.cpp" />
     <ClCompile Include="AudioManager.cpp" />
+    <ClCompile Include="Board.cpp" />
     <ClCompile Include="BoardRender.cpp" />
     <ClCompile Include="CPU.cpp" />
     <ClCompile Include="CPURender.cpp" />
@@ -174,7 +175,6 @@
     <ClCompile Include="RoundOverScreen.cpp" />
     <ClCompile Include="SaveManager.cpp" />
     <ClCompile Include="SceneManager.cpp" />
-    <ClCompile Include="src\Board.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="TextHelper.cpp" />
     <ClCompile Include="TTT.cpp" />
@@ -182,6 +182,7 @@
   <ItemGroup>
     <ClInclude Include="Arrow.hpp" />
     <ClInclude Include="AudioManager.hpp" />
+    <ClInclude Include="Board.hpp" />
     <ClInclude Include="BoardRender.hpp" />
     <ClInclude Include="CPU.hpp" />
     <ClInclude Include="CPURender.hpp" />
@@ -192,7 +193,6 @@
     <ClInclude Include="GameOverScene.hpp" />
     <ClInclude Include="GameWinAudio.hpp" />
     <ClInclude Include="GridSizeInput.hpp" />
-    <ClInclude Include="include\Board.hpp" />
     <ClInclude Include="IntroAudio.hpp" />
     <ClInclude Include="IntroScene.hpp" />
     <ClInclude Include="Level1Audio.hpp" />

@@ -100,17 +100,22 @@ void Level4Scene::handleEvent(const sf::Event& event, AudioManager& audio)
             else if (key->scancode == sf::Keyboard::Scancode::Enter)
             {
                 bool valid = gameManager.handlePlayerMove(cursorRow, cursorCol, board);
-                if (valid)
+
+                if (valid && !gameManager.isGameOver())
+                {
+                    gameManager.handleCPUMove(board, cpu); 
+                }
+
+                if (valid) 
                 {
                     SaveData data;
-                    data.level = 4; //  change per level
+                    data.level = 4; // change per level
                     data.gridSize = board.getSize();
                     data.playerScore = gameManager.getPlayerScore();
                     data.cpuScore = gameManager.getCPUScore();
                     data.roundNumber = gameManager.getRoundNumber();
                     data.playerTurn = gameManager.getIsPlayerTurn();
 
-                    //  copy board state
                     data.boardData.resize(board.getSize(), std::vector<int>(board.getSize(), 0));
                     for (int r = 0; r < board.getSize(); r++)
                         for (int c = 0; c < board.getSize(); c++)
@@ -119,14 +124,7 @@ void Level4Scene::handleEvent(const sf::Event& event, AudioManager& audio)
                             data.boardData[r][c] = (cell == CellState::empty) ? 0 :
                                 (cell == CellState::player) ? 1 : 2;
                         }
-
                     SaveManager::save(data);
-                }
-
-
-                if (valid && !gameManager.isGameOver())
-                {
-                    gameManager.handleCPUMove(board, cpu);
                 }
 
                 if (gameManager.isGameOver())
