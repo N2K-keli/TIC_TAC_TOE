@@ -80,9 +80,15 @@ A feature-rich TicTacToe game built in **C++ with SFML**, developed as part of t
 
 ---
 
+
+- link to the game :  https://n2k-keli.itch.io/ttt-tictactoe 
+
+
 ## Built With
 
 - **C++17**
 - **SFML 3** — graphics, audio, windowing
 - **MVC Architecture** — data classes separated from render classes
 - **Strategy Pattern** — CPU AI algorithms are fully modular and swappable
+
+
